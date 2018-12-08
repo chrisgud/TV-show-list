@@ -40,6 +40,7 @@ if (localStorage.jwtToken) {
 
 function App() {
   return (
+
     <Provider store={store}>
       <Router>
         <div className="App">
@@ -51,9 +52,6 @@ function App() {
             <Route exact path="/search" component={Search} />
             <Route exact path="/my-list" component={MyList} />
             <Route component={NoMatch} />
-          </Switch>
-
-          <Switch>
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
           </Switch>
         </div>
