@@ -51,8 +51,8 @@ function App() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/search" component={Search} />
             <Route exact path="/my-list" component={MyList} />
-            <Route component={NoMatch} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <Route component={NoMatch} />
           </Switch>
         </div>
       </Router>
