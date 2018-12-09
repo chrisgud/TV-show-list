@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../actions/authActions";
+import { getCurrentUser } from "../actions/authActions";
 
 class Dashboard extends Component {
+
+    componentDidMount = e => {
+        getCurrentUser();
+    }
 
     onLogoutClick = e => {
         e.preventDefault();
@@ -18,6 +23,7 @@ class Dashboard extends Component {
                     <div className="col s12 center-align">
                         <h4>
                             <b>Hey there,</b> {user.name.split(" ")[0]}
+                            <b>{user.test}</b>
                             <p className="flow-text grey-text text-darken-1">
                                 You are logged into a full-stack{" "}
                                 <span style={{ fontFamily: "monospace" }}>MERN</span> app 👏
@@ -44,6 +50,7 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
     logoutUser: PropTypes.func.isRequired,
+    getCurrentUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
 };
 
@@ -53,5 +60,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { logoutUser }
+    { logoutUser, getCurrentUser }
 )(Dashboard);

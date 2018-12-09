@@ -18,7 +18,19 @@ const userSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  favoritedShows: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Shows"
+    }
+  ],
+  watchList: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Shows"
+    }
+  ],
 });
 
 const User = mongoose.model("User", userSchema);

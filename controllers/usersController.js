@@ -19,7 +19,7 @@ module.exports = {
         if (!isValid) {
             return res.status(400).json(errors);
         }
-        console.log(req.body);
+
         db.User.findOne({ email: req.body.email })
             .then(user => {
                 if (user) {
@@ -104,7 +104,9 @@ module.exports = {
         res.json({
             id: req.user.id,
             name: req.user.name,
-            email: req.user.email
+            test: "testing-123",
+            email: req.user.email,
+            watchList: req.user.watchList,
         });
-    }
+    },
 }

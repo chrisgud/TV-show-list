@@ -1,4 +1,5 @@
 const express = require("express");
+const logger = require("morgan");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
@@ -8,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Define middleware here
+app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -23,8 +25,6 @@ app.use(routes);
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/tvShowList");
-
-
 
 // Start the API server
 app.listen(PORT, function() {
