@@ -57,7 +57,45 @@ export const setCurrentUser = decoded => {
 export const getCurrentUser = () => dispatch => {
     dispatch(setUserLoading());
     axios
-        .get("/api/user/currentuser")
+        .get("/api/users/currentUser")
+        .then(res =>
+            dispatch({
+                type: GET_CURRENT_USER,
+                payload: res.data
+            })
+        )
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
+
+// Get current user with Favorited Shows
+export const getCurrentUserFavoriteShows = () => dispatch => {
+    dispatch(setUserLoading());
+    axios
+        .get("/api/users/currentUserFavortiedShows")
+        .then(res =>
+            dispatch({
+                type: GET_CURRENT_USER,
+                payload: res.data
+            })
+        )
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
+
+// Get current user with Watchlist
+export const getCurrentUsersWatchList = () => dispatch => {
+    dispatch(setUserLoading());
+    axios
+        .get("/api/users/currentUserWatchlist")
         .then(res =>
             dispatch({
                 type: GET_CURRENT_USER,

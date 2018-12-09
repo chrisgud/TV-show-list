@@ -104,9 +104,25 @@ module.exports = {
         res.json({
             id: req.user.id,
             name: req.user.name,
-            test: "testing-123",
+            email: req.user.email,
+        });
+    },
+
+    currentUserWatchlist: function (req, res) {
+        res.json({
+            id: req.user.id,
+            name: req.user.name,
             email: req.user.email,
             watchList: req.user.watchList,
+        });
+    },
+
+    currentUserFavoritedShows: function (req, res) {
+        res.json({
+            id: req.user.id,
+            name: req.user.name,
+            email: req.user.email,
+            favortiedShows: req.user.favoritedShows,
         });
     },
 }

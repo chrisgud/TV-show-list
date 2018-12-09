@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logoutUser } from "../actions/authActions";
-import { getCurrentUser } from "../actions/authActions";
+import { logoutUser, getCurrentUser, getCurrentUsersWatchList, getCurrentUserFavoriteShows } from "../actions/authActions";
 
 class Dashboard extends Component {
 
     componentDidMount = e => {
-        getCurrentUser();
+        this.props.getCurrentUser();
     }
 
     onLogoutClick = e => {
