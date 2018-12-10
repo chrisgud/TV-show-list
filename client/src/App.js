@@ -10,7 +10,6 @@ import store from "./store";
 
 import Home from "./pages/Home";
 import Search from "./pages/Search";
-import FavoritesList from "./pages/FavoritesList";
 import WatchList from "./pages/WatchList";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
@@ -51,7 +50,6 @@ function App() {
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/search" component={Search} />
-            <Route exact path="/favorites-list" component={FavoritesList} />
             <Route exact path="/watch-list" component={WatchList} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <Route component={NoMatch} />
