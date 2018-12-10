@@ -1,17 +1,15 @@
 import React, { Component } from "react";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import SearchBar from "../components/SearchBar";
 import TVShowGrid from "../components/TVShowGrid";
 import API from "../utils/API";
 
 const theme = createMuiTheme();
 
-class Search extends Component {
+class WatchList extends Component {
   state = {
     results: {}
   };
-  // When this component mounts, grab the book with the _id of this.props.match.params.id
-  // e.g. localhost:3000/books/599dcb67f0f16317844583fc
+
   componentDidMount() {
     API.getBook(this.props.match.params.id)
       .then(res => this.setState({ book: res.data }))
@@ -22,7 +20,6 @@ class Search extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <div>
-          <SearchBar />
           {this.state.results.length > 0 ? (
             <TVShowGrid results={this.state.results}/>
           ) : null}
@@ -32,4 +29,4 @@ class Search extends Component {
   }
 }
 
-export default Search;
+export default WatchList;
