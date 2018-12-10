@@ -12,7 +12,7 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 import WatchList from "./pages/WatchList";
 import NoMatch from "./pages/NoMatch";
-import Nav from "./components/Nav";
+import ButtonAppBar from "./components/Nav";
 import Landing from "./components/Landing";
 import Login from "./components/auth/Login"
 import Register from "./components/auth/Register"
@@ -44,11 +44,12 @@ function App() {
     <Provider store={store}>
       <Router>
         <div className="App">
-          <Nav />
+          <ButtonAppBar />
           <Switch>
           <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/home" component={Home} />
             <Route exact path="/search" component={Search} />
             <Route exact path="/watch-list" component={WatchList} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
