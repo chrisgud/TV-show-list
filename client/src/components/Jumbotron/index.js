@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import firstimage from '../../Images/best-new-tv-shows-2016-ss01.jpg';
 import secondimage from '../../Images/friends.jpg';
 import thirdimage from '../../Images/sci-fi-tv-netflix.jpg';
-import "../../styles/Jumbotron.css";
+// import "../../styles/Jumbotron.css";
 
 
 class Jumbotron extends Component {
