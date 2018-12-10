@@ -1,9 +1,3 @@
-# Node Modules
-node_modules
-client/node_modules
-
-# Any .env used.
-client/.env
-
-# Any bug reports
-.vscode
+node_modules/
+.env
+.vscode/
