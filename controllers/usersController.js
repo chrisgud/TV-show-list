@@ -19,7 +19,7 @@ module.exports = {
         if (!isValid) {
             return res.status(400).json(errors);
         }
-        console.log(req.body);
+
         db.User.findOne({ email: req.body.email })
             .then(user => {
                 if (user) {
@@ -104,7 +104,25 @@ module.exports = {
         res.json({
             id: req.user.id,
             name: req.user.name,
-            email: req.user.email
+            email: req.user.email,
         });
-    }
+    },
+
+    currentUserWatchlist: function (req, res) {
+        res.json({
+            id: req.user.id,
+            name: req.user.name,
+            email: req.user.email,
+            watchList: req.user.watchList,
+        });
+    },
+
+    currentUserFavoritedShows: function (req, res) {
+        res.json({
+            id: req.user.id,
+            name: req.user.name,
+            email: req.user.email,
+            favortiedShows: req.user.favoritedShows,
+        });
+    },
 }

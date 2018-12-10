@@ -26,5 +26,19 @@ router
         usersController.currentUser
     )
 
+router
+    .route("/currentUserWatchlist")
+    .get(
+        passport.authenticate("jwt", { session: false }),
+        usersController.currentUserWatchlist
+    )
+
+router
+    .route("/currentUserFavortiedShows")
+    .get(
+        passport.authenticate("jwt", { session: false }),
+        usersController.currentUserFavoritedShows
+    )
+
 module.exports = router;
 
