@@ -16,5 +16,9 @@ export default {
   // Saves a book to the database
   saveBook: function(bookData) {
     return axios.post("/api/books", bookData);
+  },
+
+  getShows: function(title) {
+    return axios.get("/api/external/omdb/" + title);
   }
 };

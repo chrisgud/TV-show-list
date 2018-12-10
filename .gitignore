@@ -3,7 +3,8 @@ node_modules
 client/node_modules
 
 # Any .env used.
+.env
 client/.env
 
 # Any bug reports
-.vscode
+.vscode 
