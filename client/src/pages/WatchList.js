@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import TVShowGrid from "../components/TVShowGrid";
-import API from "../utils/API";
+import { logoutUser, getCurrentUser, getCurrentUsersWatchList, getCurrentUserFavoriteShows } from "../actions/authActions";
 
 const theme = createMuiTheme();
 
@@ -10,19 +10,11 @@ class WatchList extends Component {
     results: {}
   };
 
-  componentDidMount() {
-    API.getBook(this.props.match.params.id)
-      .then(res => this.setState({ book: res.data }))
-      .catch(err => console.log(err));
-  }
-
   render() {
     return (
       <MuiThemeProvider theme={theme}>
         <div>
-          {this.state.results.length > 0 ? (
-            <TVShowGrid results={this.state.results}/>
-          ) : null}
+          <TVShowGrid results={this.props.getCurrentUsersWatchList()}/>
         </div>
       </MuiThemeProvider>
     );
