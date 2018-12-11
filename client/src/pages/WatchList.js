@@ -7,14 +7,21 @@ const theme = createMuiTheme();
 
 class WatchList extends Component {
   state = {
-    results: {}
+    results: [
+      {
+        title: "The Office",
+        year: 2006,
+        image: "",
+        network: "NBC"
+      }
+    ]
   };
 
   render() {
     return (
       <MuiThemeProvider theme={theme}>
         <div>
-          <TVShowGrid results={this.props.getCurrentUsersWatchList()}/>
+          <TVShowGrid results={this.state.results}/>
         </div>
       </MuiThemeProvider>
     );
