@@ -16,13 +16,11 @@ class SearchBar extends Component {
         this.setState({results: []});
       } else {
         API.getShows(`${this.state.searchText}`)
-          .then(res => console.log(res.data))
+          .then(res => this.setState({results: res.data}))
           .catch(err => console.log(err));
       }
     });
   }
-
-  //this.setState({results: res.data})
 
   render() {
     console.log(this.state.results);

@@ -20,7 +20,12 @@ class Grid extends Component {
               </IconButton>
             }
           >
-            <img src={result.show.image.medium} alt={result.title} />
+            {result.show.image ? (
+              <img src={result.show.image.medium} alt={result.show.name} />
+            ) : (
+              <img src="//via.placeholder.com/128x160" alt={result.show.name} />
+            )}
+            {result.show.name}
           </GridListTile>
         ))}
       </GridList>
