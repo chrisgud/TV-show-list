@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import firstimage from '../../Images/best-new-tv-shows-2016-ss01.jpg';
 import secondimage from '../../Images/friends.jpg';
 import thirdimage from '../../Images/sci-fi-tv-netflix.jpg';
