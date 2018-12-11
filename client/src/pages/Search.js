@@ -8,18 +8,14 @@ const theme = createMuiTheme();
 
 class Search extends Component {
   state = {
-    results: {}
-/*
+    results: {},
     error: null,
     isLoaded: false,
     shows: []
-    */
   };
-  // When this component mounts, grab the book with the _id of this.props.match.params.id
-  // e.g. localhost:3000/books/599dcb67f0f16317844583fc
+
   componentDidMount() {
     API.getShows(encodeURI("The Matrix"))
-      // .then(res => res.json())
       .then(
         (result) => {
           let newShows = this.state.shows;
