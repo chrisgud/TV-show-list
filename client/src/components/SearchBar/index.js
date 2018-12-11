@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
+import TVShowGrid from '../TVShowGrid';
 import API from '../../utils/API';
 
 class SearchBar extends Component {
   state = {
     searchText: '',
-    amount: 15,
     results: []
   }
 
@@ -25,6 +25,7 @@ class SearchBar extends Component {
   //this.setState({results: res.data})
 
   render() {
+    console.log(this.state.results);
     return (
       <div>
         <TextField 
@@ -35,6 +36,9 @@ class SearchBar extends Component {
           fullWidth={true}
         />
         <br />
+        {this.state.results.length > 0 ? (
+          <TVShowGrid results={this.state.results}/>
+        ) : null}
       </div>
     )
   }
