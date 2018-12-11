@@ -15,7 +15,7 @@ class Search extends Component {
   };
 
   componentDidMount() {
-    API.getShows(encodeURI("The Matrix"))
+    API.getShows(encodeURI("The Office"))
       .then(
         (result) => {
           let newShows = this.state.shows;
@@ -40,9 +40,6 @@ class Search extends Component {
       <MuiThemeProvider theme={theme}>
         <div>
           <SearchBar />
-          {this.state.results.length > 0 ? (
-            <TVShowGrid results={this.state.results}/>
-          ) : null}
         </div>
       </MuiThemeProvider>
     );
