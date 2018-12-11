@@ -15,12 +15,14 @@ class SearchBar extends Component {
       if(val === '') {
         this.setState({results: []});
       } else {
-        API.get(`${this.state.searchText}`)
-          .then(res => this.setState({results: res.data}))
+        API.getShows(`${this.state.searchText}`)
+          .then(res => console.log(res.data))
           .catch(err => console.log(err));
       }
     });
   }
+
+  //this.setState({results: res.data})
 
   render() {
     return (
