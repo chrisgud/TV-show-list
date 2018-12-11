@@ -19,6 +19,6 @@ export default {
   },
 
   getShows: function(title) {
-    return axios.get("/api/external/omdb/" + title);
+    return axios.get(`/api/external/tvMaze/${title}`);
   }
 };
