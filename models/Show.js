@@ -26,6 +26,6 @@ const showSchema = new Schema({
   ]
 });
 
-const Show = mongoose.model("tvShow", showSchema);
+const Show = mongoose.model("Show", showSchema);
 
 module.exports = Show;

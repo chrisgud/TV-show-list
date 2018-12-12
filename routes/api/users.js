@@ -16,7 +16,7 @@ router
     .route("/login")
     .post(usersController.loginUser);
 
-// @route GET api/users/currentuser
+// @route GET api/users/currentUser
 // @desc Return current user
 // @access Private
 router
@@ -26,15 +26,25 @@ router
         usersController.currentUser
     )
 
+// @route GET api/users/currentUserWatchlist
+// @desc Return current user
+// @access Private
 router
     .route("/currentUserWatchlist")
     .get(
         passport.authenticate("jwt", { session: false }),
         usersController.currentUserWatchlist
     )
+    .post(
+        passport.authenticate("jwt", { session: false }),
+        usersController.addToWatchlist
+    )
 
+// @route GET api/users/currentUserFavorites
+// @desc Return current user
+// @access Private
 router
-    .route("/currentUserFavortiedShows")
+    .route("/currentUserFavorites")
     .get(
         passport.authenticate("jwt", { session: false }),
         usersController.currentUserFavoritedShows
