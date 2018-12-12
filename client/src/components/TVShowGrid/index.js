@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { GridList, GridTile } from '@material-ui/core/GridList';
-import IconButton from '@material-ui/core/IconButton';
+import Grid from '../Grid';
 import Dialog from '@material-ui/core/Dialog';
 import Button from '@material-ui/core/Button';
 
@@ -21,27 +20,13 @@ class TVShowGrid extends Component {
 
   render() {
     let resultsContent;
-    const { results } = this.props;
+    const shows = this.props.results;
+    console.log(shows);
 
-    if(results) {
-      resultsContent = 
-        <GridList cols={3}>
-          {results.map(result => (
-            <GridTile
-              title={"TV Show title"}
-              key={result.id}
-              subtitle={"TV Show years"}
-              actionIcon={
-                <IconButton onClick={() => this.handleOpen("Result")}>
-                  Zoom button
-                </IconButton>
-              }
-            >
-              Results go here.
-            </GridTile>
-          ))}
-        </GridList>
-      
+
+    if(shows) {
+      resultsContent = <Grid results={shows} />
+
     } else {
       resultsContent = null;
     }
