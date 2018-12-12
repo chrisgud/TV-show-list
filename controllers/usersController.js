@@ -23,7 +23,11 @@ module.exports = {
         db.User.findOne({ email: req.body.email })
             .then(user => {
                 if (user) {
-                    return res.status(400).json({ email: "Email already exists" });
+                    return res.status(400).json(
+                        {
+                            email: "Email already exists"
+                        }
+                    );
                 }
                 const newUser = new db.User({
                     name: req.body.name,
@@ -102,7 +106,6 @@ module.exports = {
 
     //Control for adding to Watchlist
     addToWatchlist: function (req, res) {
-        console.log(req);
         const userID = req.user.id;
 
         db.Show
@@ -124,7 +127,6 @@ module.exports = {
 
     //Control for adding to favorites
     addToFavorites: function (req, res) {
-        console.log(req);
         const userID = req.user.id;
 
         db.Show

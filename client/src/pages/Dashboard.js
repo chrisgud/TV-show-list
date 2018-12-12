@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logoutUser, getCurrentUser, getCurrentUsersWatchList, getCurrentUserFavoriteShows } from "../actions/authActions";
+import { 
+    logoutUser, 
+    getCurrentUser, 
+} from "../actions/authActions";
 
 class Dashboard extends Component {
 
