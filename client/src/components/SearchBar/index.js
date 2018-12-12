@@ -23,7 +23,6 @@ class SearchBar extends Component {
   }
 
   render() {
-    console.log(this.state.results);
     return (
       <div>
         <TextField 

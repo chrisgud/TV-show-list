@@ -20,7 +20,6 @@ class Search extends Component {
         (result) => {
           let newShows = this.state.shows;
           newShows.push(result.data);
-          console.log(newShows);
           this.setState({
             isLoaded: true,
             shows: newShows
