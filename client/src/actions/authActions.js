@@ -110,6 +110,25 @@ export const getCurrentUsersWatchList = () => dispatch => {
         );
 };
 
+// Post shows to watchlist
+export const postToUserWatchList = (showData) => dispatch => {
+    dispatch(setUserLoading());
+    axios
+        .post("/api/users/currentUserWatchlist", showData)
+        .then(res =>
+            dispatch({
+                type: GET_CURRENT_USER,
+                payload: res.data
+            })
+        )
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
+
 // User loading
 export const setUserLoading = () => {
     return {
