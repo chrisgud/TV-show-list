@@ -23,8 +23,10 @@ class TVShowGrid extends Component {
     const shows = this.props.results;
     console.log(shows);
 
+
     if(shows) {
       resultsContent = <Grid results={shows} />
+
     } else {
       resultsContent = null;
     }
