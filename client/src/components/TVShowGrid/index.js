@@ -24,7 +24,7 @@ class TVShowGrid extends Component {
     const { results } = this.props;
 
     if(results) {
-      resultsContent = (
+      resultsContent = 
         <GridList cols={3}>
           {results.map(result => (
             <GridTile
@@ -41,7 +41,7 @@ class TVShowGrid extends Component {
             </GridTile>
           ))}
         </GridList>
-      )
+      
     } else {
       resultsContent = null;
     }
