@@ -1,10 +1,26 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import firstimage from '../../Images/best-new-tv-shows-2016-ss01.jpg';
-import secondimage from '../../Images/friends.jpg';
-import thirdimage from '../../Images/sci-fi-tv-netflix.jpg';
-// import "../../styles/Jumbotron.css";
+import firstimage from '../../Images/watching-tv.webp';
+import secondimage from '../../Images/marvel-holiday-2018-ss06.jpg';
+import thirdimage from '../../Images/the-sinner.jpg';
+import fourthimage from '../../Images/fresh-off-the-boat-tv-review.jpg';
+import fifthimage from '../../Images/breaking-bad.jpg'
 
+
+const styles = {
+  header: {
+    backgroundColor: "white",
+    color: "black"
+  },
+  description: {
+    backgroundColor: "white",
+    color: "black",
+    paddingBottom: "1em"
+  },
+  src: {
+    border: "10px solid black",
+  }
+};
 
 class Jumbotron extends Component {
   
@@ -18,22 +34,36 @@ render() {
       <div className="carousel-item active">
       <img className="d-block w-100" src={firstimage} alt="First slide" />
       <div class="carousel-caption d-none d-md-block">
-        <h1>Vivamus massa velit</h1>
-        <h3>tempor a tortor ac, maximus porttitor magna</h3>
+        <h1 style={styles.header}>Welcome to VIST</h1>
+        <h3 style={styles.description}>Your new favorite TV organizing app</h3>
       </div>
       </div>
       <div className="carousel-item">
       <img className="d-block w-100" src={secondimage} alt="Second slide" />
       <div class="carousel-caption d-none d-md-block">
-        <h1>Vivamus massa velit</h1>
-        <h3>tempor a tortor ac, maximus porttitor magna</h3>
+        <h1 style={styles.header}>Vivamus massa velit</h1>
+        <h3 style={styles.description}>tempor a tortor ac, maximus porttitor magna</h3>
       </div>
       </div>
       <div className="carousel-item">
       <img className="d-block w-100" src={thirdimage} alt="Third slide" />
       <div class="carousel-caption d-none d-md-block">
-        <h1>Vivamus massa velit</h1>
-        <h3>tempor a tortor ac, maximus porttitor magna</h3>
+        <h1 style={styles.header}>Vivamus massa velit</h1>
+        <h3 style={styles.description}>tempor a tortor ac, maximus porttitor magna</h3>
+      </div>
+      </div>
+      <div className="carousel-item">
+      <img className="d-block w-100" src={fourthimage} alt="Fourth slide" />
+      <div class="carousel-caption d-none d-md-block">
+        <h1 style={styles.header}>Vivamus massa velit</h1>
+        <h3 style={styles.description}>tempor a tortor ac, maximus porttitor magna</h3>
+      </div>
+      </div>
+      <div className="carousel-item">
+      <img className="d-block w-100" src={fifthimage} alt="Fifth slide" />
+      <div class="carousel-caption d-none d-md-block">
+        <h1 style={styles.header}>Vivamus massa velit</h1>
+        <h3 style={styles.description}>tempor a tortor ac, maximus porttitor magna</h3>
       </div>
       </div>
       </div>
