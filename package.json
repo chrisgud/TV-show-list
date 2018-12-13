@@ -29,6 +29,7 @@
     "if-env": "^1.0.4",
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.4.0",
+    "material-design-icons": "^3.0.1",
     "mongoose": "^5.0.17",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",

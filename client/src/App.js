@@ -12,7 +12,7 @@ import Home from "./pages/Home";
 import Search from "./pages/Search";
 import WatchList from "./pages/WatchList";
 import NoMatch from "./pages/NoMatch";
-import ButtonAppBar from "./components/Nav";
+import TemporaryDrawer from "./components/Nav";
 import Landing from "./components/Landing";
 import Login from "./components/auth/Login"
 import Register from "./components/auth/Register"
@@ -46,7 +46,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <div className="App">
-          <ButtonAppBar />
+          <TemporaryDrawer />
           <SimpleMenu />
           <Switch>
             <Route exact path="/" component={Home} />
