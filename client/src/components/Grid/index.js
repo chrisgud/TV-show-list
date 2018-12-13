@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
+import {
+  postToUserWatchList
+} from "../../actions/authActions";
+import Dashboard from '../../pages/Dashboard';
 
-var moment = require('moment');
+const moment = require('moment');
 
 const gridTileStyle = {
   backgroundColor: 'black'
 }
+
 
 const imgStyle = {
   height: '100%',
@@ -19,6 +27,12 @@ const imgStyle = {
 }
 
 class Grid extends Component {
+
+  addToWatchList = show => {
+    console.log(show)
+    this.props.postToUserWatchList(show)
+  }
+
   render() {
     const shows = this.props.results;
 
@@ -28,7 +42,7 @@ class Grid extends Component {
       <GridList cols={8}>
         {shows.map(result => (
           <GridListTile 
-            key={result.show.image}
+            key={result.show.id}
             style={gridTileStyle}
           >
             {result.show.image ? (
@@ -41,7 +55,9 @@ class Grid extends Component {
               subtitle={<span>{moment(result.show.premiered).format('YYYY')} {result.show.network ? (<span>• {result.show.network.name}</span>) : (null)}</span>}
               actionIcon={
                 <IconButton color="primary" classname="">
-                  <AddIcon />
+                  <AddIcon
+                    onClick={() => this.addToWatchList(result)}
+                  />
                 </IconButton>
               }
             />
@@ -52,4 +68,15 @@ class Grid extends Component {
   }
 }
 
-export default Grid;
+Dashboard.propTypes = {
+  addToWatchList: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { postToUserWatchList }
+)(Grid);
