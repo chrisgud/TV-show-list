@@ -9,12 +9,12 @@ import Dialog from '@material-ui/core/Dialog';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
+//import CardActions from '@material-ui/core/CardActions';
+//import Collapse from '@material-ui/core/Collapse';
+//import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
+//import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
 import {
   postToUserWatchList
@@ -74,7 +74,7 @@ class Grid extends Component {
       <GridList cols={7}>
 
         {shows.map(result => (
-          <GridListTile 
+          <GridListTile
             key={result.show.id}
             style={gridTileStyle}
             onClick={() => this.handleOpen(result)}
@@ -82,13 +82,13 @@ class Grid extends Component {
             {result.show.image ? (
               <img style={imgStyle} src={result.show.image.medium} alt={result.show.name} />
             ) : (
-              <img style={imgStyle} src="https://cdn1.iconfinder.com/data/icons/media-exercise-and-cool-stuff/500/TV_white-512.png" alt={result.show.name} layout-fill />
-            )}
-            <GridListTileBar 
+                <img style={imgStyle} src="https://cdn1.iconfinder.com/data/icons/media-exercise-and-cool-stuff/500/TV_white-512.png" alt={result.show.name} layout-fill="true" />
+              )}
+            <GridListTileBar
               title={result.show.name}
               subtitle={<span>{moment(result.show.premiered).format('YYYY')} {result.show.network ? (<span>• {result.show.network.name}</span>) : (null)}</span>}
               actionIcon={
-                <IconButton color="secondary" classname="">
+                <IconButton color="secondary" className="">
                   <AddIcon
                     onClick={() => this.addToWatchList(result)}
                   />
@@ -99,33 +99,33 @@ class Grid extends Component {
         ))}
 
         <Dialog
-            id="modal-popup" 
-            actions={actions}
-            modal={false}
-            open={this.state.open}
-            onClose={this.handleClose}
-            style={dialogStyle}
-          >
-          {this.state.currentResult ? (
-            <Card 
-              className="showModal"
-              style={cardStyle}
-              id="modal-card"
-            >
-              <CardHeader
-                title={this.state.currentResult.show.name}
-                subheader={<span>{moment(this.state.currentResult.show.premiered).format('YYYY')} {this.state.currentResult.show.network ? (<span>• {this.state.currentResult.show.network.name}</span>) : (null)}</span>}
-              />
-              <CardContent>
-                <b>Summary</b>: {this.state.currentResult.show.summary.replace(/<\/?[^>]+(>|$)/g, "")}
-                <br />
-                <br />
-                {this.state.currentResult.show.officialSite ? (<span><b>Official Site</b>: <a href={this.state.currentResult.show.officialSite} target="_blank">Click here</a></span>) : (null)}
-              </CardContent>
-            </Card>
-          ) : (null)
-          }
-          </Dialog>
+          id="modal-popup"
+          actions={actions}
+          //modal={false}
+          open={this.state.open}
+          onClose={this.handleClose}
+          style={dialogStyle}
+        ><div>
+            {this.state.currentResult ? (
+              <Card
+                className="showModal"
+                style={cardStyle}
+                id="modal-card"
+              >
+                <CardHeader
+                  title={this.state.currentResult.show.name}
+                  subheader={<span>{moment(this.state.currentResult.show.premiered).format('YYYY')} {this.state.currentResult.show.network ? (<span>• {this.state.currentResult.show.network.name}</span>) : (null)}</span>}
+                />
+                <CardContent>
+                  <b>Summary</b>: {this.state.currentResult.show.summary.replace(/<\/?[^>]+(>|$)/g, "")}
+                  <br />
+                  <br />
+                  {this.state.currentResult.show.officialSite ? (<span><b>Official Site</b>: <a href={this.state.currentResult.show.officialSite} target="_blank">Click here</a></span>) : (null)}
+                </CardContent>
+              </Card>
+            ) : (null)
+            }</div>
+        </Dialog>
 
       </GridList>
     )
