@@ -31,10 +31,6 @@ class TVShowGrid extends Component {
       resultsContent = null;
     }
 
-    const actions = [
-      <Button label="Close" primary={true} onClick={this.handleClose} />
-    ]
-
     return (
       <div>
         {resultsContent}
