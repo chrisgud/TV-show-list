@@ -8,7 +8,6 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Dialog from '@material-ui/core/Dialog';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
@@ -21,6 +20,7 @@ import {
   postToUserWatchList
 } from "../../actions/authActions";
 import Dashboard from '../../pages/Dashboard';
+import "./style.css";
 
 const moment = require('moment');
 
@@ -29,14 +29,14 @@ const gridTileStyle = {
 }
 
 const dialogStyle = {
-  width: 1000,
-  height: 1000
+  width: "auto",
+  height: "auto"
 }
 
 const cardStyle = {
-  width: 400
+  width: "auto",
+  height: "auto"
 }
-
 
 const imgStyle = {
   height: '100%',
@@ -66,7 +66,6 @@ class Grid extends Component {
 
   render() {
     const shows = this.props.results;
-    console.log(shows);
     const actions = [
       <Button label="Close" primary={true} onClick={this.handleClose} />
     ]
@@ -99,7 +98,8 @@ class Grid extends Component {
           </GridListTile>
         ))}
 
-        <Dialog 
+        <Dialog
+            id="modal-popup" 
             actions={actions}
             modal={false}
             open={this.state.open}
@@ -110,18 +110,17 @@ class Grid extends Component {
             <Card 
               className="showModal"
               style={cardStyle}
+              id="modal-card"
             >
               <CardHeader
                 title={this.state.currentResult.show.name}
-                subheader={moment(this.state.currentResult.show.premiered).format('YYYY')}
-              />
-              <CardMedia
-                className="modalImage"
-                image={this.state.currentResult.show.image.medium}
-                title={this.state.currentResult.show.name}
+                subheader={<span>{moment(this.state.currentResult.show.premiered).format('YYYY')} {this.state.currentResult.show.network ? (<span>• {this.state.currentResult.show.network.name}</span>) : (null)}</span>}
               />
               <CardContent>
-                {this.state.currentResult.show.summary}
+                <b>Summary</b>: {this.state.currentResult.show.summary.replace(/<\/?[^>]+(>|$)/g, "")}
+                <br />
+                <br />
+                {this.state.currentResult.show.officialSite ? (<span><b>Official Site</b>: <a href={this.state.currentResult.show.officialSite} target="_blank">Click here</a></span>) : (null)}
               </CardContent>
             </Card>
           ) : (null)
