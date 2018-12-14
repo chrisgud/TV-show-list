@@ -23,7 +23,11 @@ module.exports = {
         db.User.findOne({ email: req.body.email })
             .then(user => {
                 if (user) {
-                    return res.status(400).json({ email: "Email already exists" });
+                    return res.status(400).json(
+                        {
+                            email: "Email already exists"
+                        }
+                    );
                 }
                 const newUser = new db.User({
                     name: req.body.name,
@@ -100,6 +104,49 @@ module.exports = {
         });
     },
 
+    //Control for adding to Watchlist
+    addToWatchlist: function (req, res) {
+        const userID = req.user.id;
+
+        db.Show
+            .create({
+                usersWhoHaveOnWatchlist: userID,
+                show: req.body.show
+            })
+            .then(dbShow => db.User.findByIdAndUpdate(req.user.id,
+                { $push: { watchList: dbShow._id } },
+                { new: true })
+            )
+            .then(updatedUser => {
+                res.json(updatedUser);
+            })
+            .catch(error => {
+                res.json(error);
+            })
+    },
+
+    //Control for adding to favorites
+    addToFavorites: function (req, res) {
+        const userID = req.user.id;
+
+        db.Show
+            .create({
+                usersWhoHaveFavorited: userID,
+                show: req.body.show
+            })
+            .then(dbShow => db.User.findByIdAndUpdate(req.user.id,
+                { $push: { favoritedShows: dbShow._id } },
+                { new: true })
+            )
+            .then(updatedUser => {
+                res.json(updatedUser);
+            })
+            .catch(error => {
+                res.json(error);
+            })
+    },
+
+    //Control for pulling the current user
     currentUser: function (req, res) {
         res.json({
             id: req.user.id,
@@ -108,21 +155,41 @@ module.exports = {
         });
     },
 
+    //Control for pulling in a user's Watchlist
     currentUserWatchlist: function (req, res) {
-        res.json({
-            id: req.user.id,
-            name: req.user.name,
-            email: req.user.email,
-            watchList: req.user.watchList,
-        });
+        db.User
+            .findById(req.user.id)
+            .populate("watchList", "show")
+            .then(populatedUser => {
+
+                res.json({
+                    watchList: populatedUser.watchList,
+                    name: populatedUser.name,
+                    // email: populatedUser.email
+                });
+            })
+            .catch(function (err) {
+                // If an error occurred, send it to the client
+                res.json(err);
+            });
     },
 
+    //Control for pulling in a user's favorites
     currentUserFavoritedShows: function (req, res) {
-        res.json({
-            id: req.user.id,
-            name: req.user.name,
-            email: req.user.email,
-            favortiedShows: req.user.favoritedShows,
-        });
+        db.User
+            .findById(req.user.id)
+            .populate("favoritedShows", "show")
+            .then(populatedUser => {
+
+                res.json({
+                    watchList: populatedUser.favoritedShows,
+                    name: populatedUser.name,
+                    // email: populatedUser.email
+                });
+            })
+            .catch(function (err) {
+                // If an error occurred, send it to the client
+                res.json(err);
+            });
     },
 }
