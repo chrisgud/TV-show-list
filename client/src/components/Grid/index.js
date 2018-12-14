@@ -9,12 +9,8 @@ import Dialog from '@material-ui/core/Dialog';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import AddIcon from '@material-ui/icons/Add';
 import {
   postToUserWatchList
@@ -76,6 +72,7 @@ class Grid extends Component {
         {shows.map(result => (
           <GridListTile 
             key={result.show.id}
+            id="grid-list-tile"
             style={gridTileStyle}
             onClick={() => this.handleOpen(result)}
           >
