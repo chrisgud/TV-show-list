@@ -72,7 +72,7 @@ class Grid extends Component {
     ]
 
     return (
-      <GridList cols={8}>
+      <GridList cols={7}>
 
         {shows.map(result => (
           <GridListTile 
@@ -83,13 +83,13 @@ class Grid extends Component {
             {result.show.image ? (
               <img style={imgStyle} src={result.show.image.medium} alt={result.show.name} />
             ) : (
-              <img style={imgStyle} src="//via.placeholder.com/128x160" alt={result.show.name} layout-fill />
+              <img style={imgStyle} src="https://cdn1.iconfinder.com/data/icons/media-exercise-and-cool-stuff/500/TV_white-512.png" alt={result.show.name} layout-fill />
             )}
             <GridListTileBar 
               title={result.show.name}
               subtitle={<span>{moment(result.show.premiered).format('YYYY')} {result.show.network ? (<span>• {result.show.network.name}</span>) : (null)}</span>}
               actionIcon={
-                <IconButton color="primary" classname="">
+                <IconButton color="secondary" classname="">
                   <AddIcon
                     onClick={() => this.addToWatchList(result)}
                   />
