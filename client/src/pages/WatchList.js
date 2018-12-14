@@ -3,7 +3,11 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import TVShowGrid from "../components/TVShowGrid";
 // import { logoutUser, getCurrentUser, getCurrentUsersWatchList, getCurrentUserFavoriteShows } from "../actions/authActions";
 
-const theme = createMuiTheme();
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
+});
 
 class WatchList extends Component {
   state = {
