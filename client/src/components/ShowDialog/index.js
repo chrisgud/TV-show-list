@@ -15,19 +15,19 @@ import AddIcon from '@material-ui/icons/Add';
 
 class ShowDialog extends Component {
 
-    render() {
-      const show = this.props.result;
-      const actions = [
-        <Button label="Close" primary={true} onClick={this.handleClose} />
-      ]
+  render() {
+    const show = this.props.result;
+    const actions = [
+      <Button label="Close" primary={true} onClick={this.handleClose} />
+    ]
 
-        return (
-          <Dialog 
-            actions={actions}
-            modal={false}
-            open={this.state.open}
-            onClose={this.handleClose}
-          >
+    return (
+      <Dialog
+        actions={actions}
+        //modal={false}
+        open={this.state.open}
+        onClose={this.handleClose}
+      ><div>
           {this.state.currentResult ? (
             <Card className="showModal">
               <CardHeader
@@ -36,9 +36,10 @@ class ShowDialog extends Component {
             </Card>
           ) : (null)
           }
-          </Dialog>
-        )
-    }
+        </div>
+      </Dialog>
+    )
+  }
 }
 
 export default ShowDialog;
