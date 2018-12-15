@@ -119,24 +119,6 @@ class TemporaryDrawer extends React.Component {
             <AppBar position="static">
               <Toolbar className={classes.navBar}>
 
-<<<<<<< HEAD
-              <IconButton className={classes.TouchApp} color="inherit" aria-label="Menu">
-                <TouchApp className={classes.icon} />
-              </IconButton>
-              <Typography variant="h2" color="white" align="center" className={classes.grow}>
-                Welcome to VIST
-              </Typography>
-              <Button
-                // variant="contained"
-                color="inherit"
-                onClick={this.toggleDrawer("left", true)}
-              >
-                Menu
-              </Button>
-            </Toolbar>
-          </AppBar>
-        </div>
-=======
                 <IconButton className={classes.TouchApp} color="inherit" aria-label="Menu">
                   <TouchApp className={classes.icon} />
                 </IconButton>
@@ -155,7 +137,6 @@ class TemporaryDrawer extends React.Component {
               </Toolbar>
             </AppBar>
           </div>
->>>>>>> ce7d668bad4b2fedfa7d458bafd59dc7451fc300
         </MuiThemeProvider>
         <Drawer
           open={this.state.left}
