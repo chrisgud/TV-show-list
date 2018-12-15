@@ -37,7 +37,7 @@ const styles = {
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20
+    marginRight: 20,
   },
   navBar: {
     backgroundImage: "linear-gradient(45deg, #C3073F, #960731)",
@@ -82,14 +82,14 @@ class TemporaryDrawer extends React.Component {
       <div className={classes.list}>
         <List>
           {["Home", "Search", "Watchlist", "Favorites"].map((text, index) => (
-            <ListItem button key={text}>
-              <Link to={`/${text}`}>
+            <Link to={`/${text}`}>
+              <ListItem button key={text}>
                 {/* <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon> */}
                 <ListItemText primary={text} />
-              </Link>
-            </ListItem>
+              </ListItem>
+            </Link>
           ))}
         </List>
         <Divider />
@@ -109,26 +109,28 @@ class TemporaryDrawer extends React.Component {
     return (
       <div>
         <MuiThemeProvider theme={theme}>
-        <div className={classes.root} id="navBar">
-          <AppBar position="static">
-            <Toolbar className={classes.navBar}>
+          <div className={classes.root} id="navBar">
+            <AppBar position="static">
+              <Toolbar className={classes.navBar}>
 
-              <IconButton className={classes.TouchApp} color="inherit" aria-label="Menu">
-                <TouchApp className={classes.icon} />
-              </IconButton>
-              <Typography variant="h2" color="textPrimary"  align="center" className={classes.grow}>
-                Welcome to VIST
+                <IconButton className={classes.TouchApp} color="inherit" aria-label="Menu">
+                  <TouchApp className={classes.icon} />
+                </IconButton>
+                <Typography variant="h2" color="textPrimary" align="center" className={classes.grow}>
+                  Welcome to VIST
               </Typography>
-              <Button
-                variant="contained"
-                color="inherit"
-                onClick={this.toggleDrawer("left", true)}
-              >
-                Menu
-              </Button>
-            </Toolbar>
-          </AppBar>
-        </div>
+                <div style={{ marginLeft: 20 }}>
+                  <Button
+                    variant="contained"
+                    color="inherit"
+                    onClick={this.toggleDrawer("left", true)}
+                  >
+                    Menu
+                  </Button>
+                </div>
+              </Toolbar>
+            </AppBar>
+          </div>
         </MuiThemeProvider>
         <Drawer
           open={this.state.left}
