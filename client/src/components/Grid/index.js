@@ -77,6 +77,7 @@ class Grid extends Component {
             onClick={() => this.handleOpen(result)}
           >
             {result.show.image ? (
+
               <img style={imgStyle} src={result.show.image.medium} alt={result.show.name} />
             ) : (
                 <img style={imgStyle} src="https://cdn1.iconfinder.com/data/icons/media-exercise-and-cool-stuff/500/TV_white-512.png" alt={result.show.name} layout-fill="true" />
@@ -128,10 +129,6 @@ class Grid extends Component {
     )
   }
 }
-
-Dashboard.propTypes = {
-  addToWatchList: PropTypes.func.isRequired
-};
 
 const mapStateToProps = state => ({
   auth: state.auth
