@@ -20,7 +20,6 @@ import Login from "./components/auth/Login"
 import Register from "./components/auth/Register"
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
-import SimpleMenu from "./components/Menu"
 
 
 // Check for token to keep user logged in
@@ -54,7 +53,6 @@ function App() {
       <Router>
         <div className="App">
           <TemporaryDrawer />
-          <SimpleMenu />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/register" component={Register} />
