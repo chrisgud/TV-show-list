@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import SearchBar from "../components/SearchBar";
-import TVShowGrid from "../components/TVShowGrid";
 import API from "../utils/API";
 
-const theme = createMuiTheme();
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
+});
 
 class Search extends Component {
   state = {

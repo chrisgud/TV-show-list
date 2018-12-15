@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import TVShowGrid from '../TVShowGrid';
 import API from '../../utils/API';
+import './style.css';
 
 class SearchBar extends Component {
   state = {
@@ -24,18 +25,28 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <div>
-        <TextField 
-          name="searchText"
-          value={this.state.searchText}
-          onChange={this.onTextChange}
-          floatinglabeltext="Search for TV Show"
-          fullWidth={true}
-        />
+      <div id="search-page-div">
+        <div id="search-title">
+        SEARCH
+        </div>
+        <div id="search-div">
+          <TextField 
+            name="searchText"
+            id="search-text"
+            value={this.state.searchText}
+            onChange={this.onTextChange}
+            floatinglabeltext="Search for TV Show"
+            fullWidth={true}
+          />
+        </div>
+
         <br />
-        {this.state.results.length > 0 ? (
-          <TVShowGrid results={this.state.results}/>
-        ) : null}
+
+        <div>
+          {this.state.results.length > 0 ? (
+            <TVShowGrid results={this.state.results}/>
+          ) : null}
+        </div>
       </div>
     )
   }

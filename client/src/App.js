@@ -13,7 +13,7 @@ import Search from "./pages/Search";
 import WatchList from "./pages/WatchList";
 import NoMatch from "./pages/NoMatch";
 import TemporaryDrawer from "./components/Nav";
-import Landing from "./components/Landing";
+//import Landing from "./components/Landing";
 import Login from "./components/auth/Login"
 import Register from "./components/auth/Register"
 import PrivateRoute from "./components/private-route/PrivateRoute";

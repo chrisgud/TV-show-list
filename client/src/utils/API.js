@@ -6,7 +6,7 @@ export default {
     return axios.get("/api/shows");
   },
   // Gets the book with the given id
-  getShow: function(id) {
+  getShowById: function(id) {
     return axios.get(`/api/shows/${id}`);
   },
   // Deletes the book with the given id
