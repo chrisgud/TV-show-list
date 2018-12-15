@@ -1,4 +1,7 @@
+// client.src.Nav.index.js
+
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withStyles, MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
@@ -37,7 +40,7 @@ const styles = {
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20
+    marginRight: 20,
   },
   navBar: {
     backgroundImage: "linear-gradient(45deg, #C3073F, #960731)",
@@ -84,37 +87,39 @@ class TemporaryDrawer extends React.Component {
       <div className={classes.list}>
         <List>
           {["Home", "Search", "Watchlist", "Favorites"].map((text, index) => (
-            <ListItem button key={text}>
-              <Link to={`/${text}`}>
+            <Link to={`/${text}`}>
+              <ListItem button key={text}>
                 {/* <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon> */}
                 <ListItemText primary={text} />
-              </Link>
-            </ListItem>
+              </ListItem>
+            </Link>
           ))}
         </List>
         <Divider />
         <List>
-          {["Account Settings", "Profile", "Logout"].map((text, index) => (
-            <ListItem button key={text}>
-              {/* <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon> */}
-              <ListItemText primary={text} />
-            </ListItem>
+          {["Account Settings", "Profile", (this.props.isAuth) ? "Logout" : "Login"].map((text, index) => (
+            <Link to={`/${text}`}>
+              <ListItem button key={text}>
+                {/* <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon> */}
+                <ListItemText primary={text} />
+              </ListItem>
+            </Link>
           ))}
         </List>
       </div>
     );
-
     return (
       <div>
         <MuiThemeProvider theme={theme}>
-        <div className={classes.root} id="navBar">
-          <AppBar position="static">
-            <Toolbar className={classes.navBar}>
+          <div className={classes.root} id="navBar">
+            <AppBar position="static">
+              <Toolbar className={classes.navBar}>
 
+<<<<<<< HEAD
               <IconButton className={classes.TouchApp} color="inherit" aria-label="Menu">
                 <TouchApp className={classes.icon} />
               </IconButton>
@@ -131,6 +136,26 @@ class TemporaryDrawer extends React.Component {
             </Toolbar>
           </AppBar>
         </div>
+=======
+                <IconButton className={classes.TouchApp} color="inherit" aria-label="Menu">
+                  <TouchApp className={classes.icon} />
+                </IconButton>
+                <Typography variant="h2" color="textPrimary" align="center" className={classes.grow}>
+                  Welcome to VIST
+              </Typography>
+                <div style={{ marginLeft: 20 }}>
+                  <Button
+                    variant="contained"
+                    color="inherit"
+                    onClick={this.toggleDrawer("left", true)}
+                  >
+                    Menu
+                  </Button>
+                </div>
+              </Toolbar>
+            </AppBar>
+          </div>
+>>>>>>> ce7d668bad4b2fedfa7d458bafd59dc7451fc300
         </MuiThemeProvider>
         <Drawer
           open={this.state.left}
@@ -154,4 +179,8 @@ TemporaryDrawer.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(TemporaryDrawer);
+const mapStateToProps = state => ({
+  isAuth: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(TemporaryDrawer));

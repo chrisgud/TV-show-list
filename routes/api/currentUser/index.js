@@ -27,6 +27,10 @@ router
         passport.authenticate("jwt", { session: false }),
         usersController.addToWatchlist
     )
+    .put(
+        passport.authenticate("jwt", {session: false}),
+        usersController.currentUserRemoveFromWatchlist
+    )
 
 // @route GET api/users/currentUser/favorites
 // @desc Return current user
@@ -43,4 +47,3 @@ router
     )
 
 module.exports = router;
-
