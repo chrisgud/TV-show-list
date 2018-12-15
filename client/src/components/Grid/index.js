@@ -9,17 +9,8 @@ import Dialog from '@material-ui/core/Dialog';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-<<<<<<< HEAD
-//import CardActions from '@material-ui/core/CardActions';
-//import Collapse from '@material-ui/core/Collapse';
-//import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-//import Typography from '@material-ui/core/Typography';
-=======
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
->>>>>>> adb6a4cccbb389ee2e51cce0ecef33fcf04a775b
 import AddIcon from '@material-ui/icons/Add';
 import {
   postToUserWatchList
@@ -86,7 +77,7 @@ class Grid extends Component {
             onClick={() => this.handleOpen(result)}
           >
             {result.show.image ? (
-              <img style={imgStyle} src={result.show.image.medium} alt={result.show.name} />
+              <img style={imgStyle} src={`https://${result.show.image.medium}`} alt={result.show.name} />
             ) : (
                 <img style={imgStyle} src="https://cdn1.iconfinder.com/data/icons/media-exercise-and-cool-stuff/500/TV_white-512.png" alt={result.show.name} layout-fill="true" />
               )}
