@@ -1,5 +1,6 @@
+// client.src.components.Grid.index.js
+
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import GridList from '@material-ui/core/GridList';
@@ -15,7 +16,6 @@ import AddIcon from '@material-ui/icons/Add';
 import {
   postToUserWatchList
 } from "../../actions/authActions";
-import Dashboard from '../../pages/Dashboard';
 import "./style.css";
 
 const moment = require('moment');
@@ -77,7 +77,6 @@ class Grid extends Component {
             onClick={() => this.handleOpen(result)}
           >
             {result.show.image ? (
-
               <img style={imgStyle} src={result.show.image.medium} alt={result.show.name} />
             ) : (
                 <img style={imgStyle} src="https://cdn1.iconfinder.com/data/icons/media-exercise-and-cool-stuff/500/TV_white-512.png" alt={result.show.name} layout-fill="true" />

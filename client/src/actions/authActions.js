@@ -129,6 +129,25 @@ export const postToUserWatchList = (showData) => dispatch => {
         );
 };
 
+// Remove shows from watchlist
+export const removeFromUserWatchList = (showData) => dispatch => {
+    dispatch(setUserLoading());
+    axios  
+        .put("/api/users/currentUser/watchlist", showData)
+        .then(res =>
+            dispatch({
+                type: GET_CURRENT_USER,
+                payload: res.data
+            })
+        )
+        .catch(err => 
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        )
+}
+
 // User loading
 export const setUserLoading = () => {
     return {
