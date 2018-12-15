@@ -19,7 +19,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 //import MailIcon from "@material-ui/icons/Mail";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import 'typeface-unlock';
 
 const styles = {
   list: {
@@ -33,10 +32,11 @@ const styles = {
   },
   grow: {
     flexGrow: 1,
-    backgroundColor: "white",
+    backgroundColor: "#010b1c",
     borderRadius: "15px 50px",
-    paddingLeft: "0.5em",
-    // fontFamily: "-apple-system"
+    color: "white",
+    paddingTop: "0.3em",
+    paddingBottom: "0.3em"
   },
   menuButton: {
     marginLeft: -12,
@@ -56,7 +56,9 @@ const theme = createMuiTheme({
     useNextVariants: true,
     // Use the system font instead of the default Roboto font.
     fontFamily: [
-      'Unlock'
+      'aclonica',
+      'Unlock',
+      'sans-serif'
     ].join(','),
   },
 });
@@ -117,6 +119,24 @@ class TemporaryDrawer extends React.Component {
             <AppBar position="static">
               <Toolbar className={classes.navBar}>
 
+<<<<<<< HEAD
+              <IconButton className={classes.TouchApp} color="inherit" aria-label="Menu">
+                <TouchApp className={classes.icon} />
+              </IconButton>
+              <Typography variant="h2" color="white" align="center" className={classes.grow}>
+                Welcome to VIST
+              </Typography>
+              <Button
+                // variant="contained"
+                color="inherit"
+                onClick={this.toggleDrawer("left", true)}
+              >
+                Menu
+              </Button>
+            </Toolbar>
+          </AppBar>
+        </div>
+=======
                 <IconButton className={classes.TouchApp} color="inherit" aria-label="Menu">
                   <TouchApp className={classes.icon} />
                 </IconButton>
@@ -135,6 +155,7 @@ class TemporaryDrawer extends React.Component {
               </Toolbar>
             </AppBar>
           </div>
+>>>>>>> ce7d668bad4b2fedfa7d458bafd59dc7451fc300
         </MuiThemeProvider>
         <Drawer
           open={this.state.left}
