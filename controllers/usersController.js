@@ -104,27 +104,64 @@ module.exports = {
         });
     },
 
-    //Control for adding to Watchlist
+    //  Control for adding to Watchlist
     addToWatchlist: function (req, res) {
         const userID = req.user.id;
 
         // See if the show exists in the Show Collection
         db.Show.findOne({ show: req.body.show })
             .then(show => {
-                console.log(show._id)
                 // If the show exists, stringify the list of users who have included
                 if (show) {
+                    const showID = show._id;
+
                     showWatchlistUsers = JSON.stringify(show.usersWhoHaveOnWatchlist);
 
                     // If the user has included it already send back message.
                     if (showWatchlistUsers.includes(userID)) {
-                        res.send("User already has on Watch list")
-                        // The check the show's _id is on their watchlist
-                        db.User.findByIdAndUpdate(userID,
+                        const alreadyOnWatchlistResponse = "User is already on Watch list";
 
-                        )
+                        // Then check the show's _id is on their watchlist
+                        db.User.findById(userID)
+                            .then(foundUser => {
+                                // Save user's watchlist as an array
+                                usersWatchlist = JSON.stringify(foundUser.watchList);
+
+                                // If the show is in the user's watchlist send back basic response
+                                if (usersWatchlist.includes(showID)) {
+                                    // console.log("Step 1")
+                                    res.send(
+                                        {
+                                            showsWatchlist: alreadyOnWatchlistResponse,
+                                            usersWatchList: "User has on watchlist too."
+                                        });
+                                } else {
+                                    // If user does not have on watchlist, add it
+                                    db.User
+                                        .findByIdAndUpdate(userID,
+                                            { $push: { watchList: showID } },
+                                            { new: true }
+                                        )
+                                        .then(userWithShow => {
+                                            // console.log("Step 2")
+                                            res.send({
+                                                showsWatchlist: alreadyOnWatchlistResponse,
+                                                usersWatchList: "Show was not on user's watchlist but was added."
+                                            })
+                                        })
+                                        .catch(error => {
+                                            // console.log("Step 3")
+                                            res.json(error)
+                                        })
+                                }
+                            })
+                            .catch(error => {
+                                // console.log("Step 4")
+                                res.send(error)
+                            })
+
                     } else {
-                        // If user is not already on 
+                        // If user is not already on show's user Watchlist
                         db.Show.findOneAndUpdate(
                             // Search for the show object being pushed
                             //TODO: search only for the show.id value
@@ -135,11 +172,54 @@ module.exports = {
                             { $push: { usersWhoHaveOnWatchlist: userID } }
                         )
                             .then(initialSearchRes => {
-                                console.log(initialSearchRes);
-                                res.send(initialSearchRes);
+                                // Then check the show's _id is on their watchlist
+                                db.User.findById(userID)
+                                    .then(foundUser => {
+                                        // Save user's watchlist as an array
+                                        usersWatchlist = JSON.stringify(foundUser.watchList);
+
+                                        // If the show is in the user's watchlist send back basic response
+                                        if (usersWatchlist.includes(showID)) {
+                                            // console.log("Step 5")
+                                            res.send(
+                                                {
+                                                    showsWatchlist: "User was not on watchlist",
+                                                    usersWatchList: "User has on their watchlist already."
+                                                }
+                                            );
+                                        } else {
+                                            // Else update user's watchlist to include show
+                                            db.User
+                                                .findByIdAndUpdate(userID,
+                                                    { $push: { watchList: showID } },
+                                                    { new: true }
+                                                )
+                                                .then(userWithShow => {
+                                                    // console.log("Step 6")
+                                                    res.send(
+                                                        {
+                                                            showsWatchlist: "Added user to show's watchlist",
+                                                            usersWatchList: "Added show to user's watchlist"
+                                                        }
+                                                    )
+                                                })
+                                                .catch(error => {
+                                                    // console.log("Step 7")
+                                                    res.json(error)
+                                                })
+                                        }
+                                    })
+                                    .catch(error => {
+                                        // console.log("Step 8")
+                                        res.json(error)
+                                    })
+                            })
+                            .catch(error => {
+                                // console.log("Step 9")
+                                res.json(error)
                             })
                     }
-                    // If the show does not exist, add to the database
+                    // If the show does not exist, add to the database with and update user's watchlist
                 } else {
                     db.Show
                         .create({
@@ -151,74 +231,163 @@ module.exports = {
                             { $push: { watchList: dbShow._id } },
                             { new: true })
                         )
+                        .catch(error => {
+                            // console.log("Step 10");
+                            res.json(error)
+                        })
                         .then(updatedUser => {
+                            // console.log("Step 11");
                             res.json(updatedUser);
                         })
                         .catch(error => {
+                            // console.log("Step 12");
                             res.json(error);
                         })
                 }
             })
     },
 
-
-    //First find if the show is in the database
-    // db.Show.findOneAndUpdate(
-    //     // Search for the show object being pushed
-    //     //TODO: search only for the show.id value
-    //     {
-    //         show: req.body.show
-    //     },
-    //     // Push the user's ID to the 
-    //     { $push: { usersWhoHaveOnWatchlist: userID } }
-    // )
-    //     .then(initialSearchRes => {
-
-    //         if (!initialSearchRes) {
-    //             // res.send("BLAH")
-    //             db.Show
-    //                 .create({
-    //                     usersWhoHaveOnWatchlist: userID,
-    //                     show: req.body.show
-    //                 })
-    //                 .then(dbShow => db.User.findByIdAndUpdate(req.user.id,
-    //                     { $push: { watchList: dbShow._id } },
-    //                     { new: true })
-    //                 )
-    //                 .then(updatedUser => {
-    //                     res.json(updatedUser);
-    //                 })
-    //                 .catch(error => {
-    //                     res.json(error);
-    //                 })
-    //         }
-    //         else {
-
-    //             res.send(initialSearchRes);
-
-    //         }
-    //     }
-    //     )
-
     //Control for adding to favorites
     addToFavorites: function (req, res) {
         const userID = req.user.id;
-        console.log(req.body.show)
-        // db.Show
-        //     .create({
-        //         usersWhoHaveFavorited: userID,
-        //         show: req.body.show
-        //     })
-        //     .then(dbShow => db.User.findByIdAndUpdate(req.user.id,
-        //         { $push: { favoritedShows: dbShow._id } },
-        //         { new: true })
-        //     )
-        //     .then(updatedUser => {
-        //         res.json(updatedUser);
-        //     })
-        //     .catch(error => {
-        //         res.json(error);
-        //     })
+
+        // See if the show exists in the Show Collection
+        db.Show.findOne({ show: req.body.show })
+            .then(show => {
+                // If the show exists, stringify the list of users who have included
+                if (show) {
+                    const showID = show._id;
+
+                    showFavoritesUsers = JSON.stringify(show.usersWhoHaveFavorited);
+
+                    // If the user has included it already send back message.
+                    if (showFavoritesUsers.includes(userID)) {
+                        const alreadyOnFavoritesResponse = "User is already on favorited list";
+
+                        // Then check the show's _id is on their Favorited
+                        db.User.findById(userID)
+                            .then(foundUser => {
+                                // Save user's favorites as an array
+                                usersFavorites = JSON.stringify(foundUser.favoritedShows);
+
+                                // If the show is in the user's Favorites send back basic response
+                                if (usersFavorites.includes(showID)) {
+                                    // console.log("Step 1")
+                                    res.send(
+                                        {
+                                            showsFavorites: alreadyOnFavoritesResponse,
+                                            usersFavorites: "User has Favorited too."
+                                        });
+                                } else {
+                                    // If user does not have on Favorites, add it
+                                    db.User
+                                        .findByIdAndUpdate(userID,
+                                            { $push: { favoritedShows: showID } },
+                                            { new: true }
+                                        )
+                                        .then(userWithShow => {
+                                            // console.log("Step 2")
+                                            res.send({
+                                                showsFavorites: alreadyOnFavoritesResponse,
+                                                usersFavorites: "Show was not on user's favorites but was added."
+                                            })
+                                        })
+                                        .catch(error => {
+                                            // console.log("Step 3")
+                                            res.json(error)
+                                        })
+                                }
+                            })
+                            .catch(error => {
+                                // console.log("Step 4")
+                                res.send(error)
+                            })
+
+                    } else {
+                        // If user is not already on show's user favorites
+                        db.Show.findOneAndUpdate(
+                            // Search for the show object being pushed
+                            //TODO: search only for the show.id value
+                            {
+                                show: req.body.show
+                            },
+                            // Push the user's ID to the "Has on favorites" array
+                            { $push: { usersWhoHaveFavorited: userID } }
+                        )
+                            .then(initialSearchRes => {
+                                // Then check the show's _id is on their favorites
+                                db.User.findById(userID)
+                                    .then(foundUser => {
+                                        // Save user's favorites as an array
+                                        usersFavorites = JSON.stringify(foundUser.favoritedShows);
+
+                                        // If the show is in the user's favorites send back basic response
+                                        if (usersFavorites.includes(showID)) {
+                                            // console.log("Step 5")
+                                            res.send(
+                                                {
+                                                    showsFavorites: "User was not on Favorites",
+                                                    usersFavorites: "User has on their Favorites already."
+                                                }
+                                            );
+                                        } else {
+                                            // Else update user's favorites to include show
+                                            db.User
+                                                .findByIdAndUpdate(userID,
+                                                    { $push: { favoritedShows: showID } },
+                                                    { new: true }
+                                                )
+                                                .then(userWithShow => {
+                                                    // console.log("Step 6")
+                                                    res.send(
+                                                        {
+                                                            showsFavorites: "Added user to show's favorites",
+                                                            usersFavorites: "Added show to user's favorites"
+                                                        }
+                                                    )
+                                                })
+                                                .catch(error => {
+                                                    // console.log("Step 7")
+                                                    res.json(error)
+                                                })
+                                        }
+                                    })
+                                    .catch(error => {
+                                        // console.log("Step 8")
+                                        res.json(error)
+                                    })
+                            })
+                            .catch(error => {
+                                // console.log("Step 9")
+                                res.json(error)
+                            })
+                    }
+                    // If the show does not exist, add to the database with and update user's Favorites
+                } else {
+                    db.Show
+                        .create({
+                            usersWhoHaveOnFavorites: userID,
+                            show: req.body.show
+                        })
+                        // After it is added, add the show's ID to the user's Favorites
+                        .then(dbShow => db.User.findByIdAndUpdate(userID,
+                            { $push: { favoritedShows: dbShow._id } },
+                            { new: true })
+                        )
+                        .catch(error => {
+                            // console.log("Step 10");
+                            res.json(error)
+                        })
+                        .then(updatedUser => {
+                            // console.log("Step 11");
+                            res.json(updatedUser);
+                        })
+                        .catch(error => {
+                            // console.log("Step 12");
+                            res.json(error);
+                        })
+                }
+            })
     },
 
     //Control for pulling the current user
