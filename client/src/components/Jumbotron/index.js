@@ -33,35 +33,35 @@ class Jumbotron extends Component {
           <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img className="d-block w-100" src={firstimage} alt="First slide" />
+                <img className="d-block w-100" src={firstimage} alt="First slide" style={styles.images} />
                 <div className="carousel-caption d-none d-md-block">
                   <h1 style={styles.header}>Welcome to VIST</h1>
                   <h3 style={styles.description}>Your new favorite TV organizing app</h3>
                 </div>
               </div>
               <div className="carousel-item">
-                <img className="d-block w-100" src={secondimage} alt="Second slide" />
+                <img className="d-block w-100" src={secondimage} alt="Second slide" style={styles.images} />
                 <div className="carousel-caption d-none d-md-block">
                   <h1 style={styles.header}>Vivamus massa velit</h1>
                   <h3 style={styles.description}>tempor a tortor ac, maximus porttitor magna</h3>
                 </div>
               </div>
               <div className="carousel-item">
-                <img className="d-block w-100" src={thirdimage} alt="Third slide" />
+                <img className="d-block w-100" src={thirdimage} alt="Third slide" style={styles.images} />
                 <div className="carousel-caption d-none d-md-block">
                   <h1 style={styles.header}>Vivamus massa velit</h1>
                   <h3 style={styles.description}>tempor a tortor ac, maximus porttitor magna</h3>
                 </div>
               </div>
               <div className="carousel-item">
-                <img className="d-block w-100" src={fourthimage} alt="Fourth slide" />
+                <img className="d-block w-100" src={fourthimage} alt="Fourth slide" style={styles.images} />
                 <div className="carousel-caption d-none d-md-block">
                   <h1 style={styles.header}>Vivamus massa velit</h1>
                   <h3 style={styles.description}>tempor a tortor ac, maximus porttitor magna</h3>
                 </div>
               </div>
               <div className="carousel-item">
-                <img className="d-block w-100" src={fifthimage} alt="Fifth slide" />
+                <img className="d-block w-100" src={fifthimage} alt="Fifth slide" style={styles.images} />
                 <div className="carousel-caption d-none d-md-block">
                   <h1 style={styles.header}>Vivamus massa velit</h1>
                   <h3 style={styles.description}>tempor a tortor ac, maximus porttitor magna</h3>
