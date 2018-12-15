@@ -20,6 +20,9 @@ const styles = {
   images: {
     height: "48em",
     border: "10px solid black"
+  },
+  box: {
+    marginTop: "1.5em"
   }
 };
 
@@ -28,7 +31,7 @@ class Jumbotron extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container" style={styles.box}>
         <div className="col-md-auto">
           <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
             <div className="carousel-inner">

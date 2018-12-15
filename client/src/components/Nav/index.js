@@ -33,7 +33,7 @@ const styles = {
   grow: {
     flexGrow: 1,
     backgroundColor: "#010b1c",
-    borderRadius: "15px 50px",
+    borderRadius: "0px 50px",
     color: "white",
     paddingTop: "0.3em",
     paddingBottom: "0.3em"
@@ -127,7 +127,6 @@ class TemporaryDrawer extends React.Component {
               </Typography>
                 <div style={{ marginLeft: 20 }}>
                   <Button
-                    variant="contained"
                     color="inherit"
                     onClick={this.toggleDrawer("left", true)}
                   >
