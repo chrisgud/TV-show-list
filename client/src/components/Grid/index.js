@@ -1,5 +1,6 @@
+// client.src.components.Grid.index.js
+
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import GridList from '@material-ui/core/GridList';
@@ -15,7 +16,6 @@ import AddIcon from '@material-ui/icons/Add';
 import {
   postToUserWatchList
 } from "../../actions/authActions";
-import Dashboard from '../../pages/Dashboard';
 import "./style.css";
 
 const moment = require('moment');

@@ -1,3 +1,5 @@
+// controllers.usersController.js
+
 const db = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -435,5 +437,30 @@ module.exports = {
                 // If an error occurred, send it to the client
                 res.json(err);
             });
+    },
+
+    currentUserRemoveFromWatchlist: function (req, res) {
+        const userID = req.user.id;
+
+        db.Show.findOneAndUpdate(
+            { show: req.body.show },
+            { $pull: { usersWhoHaveOnWatchlist: userID } },
+            { new: true }
+            )
+            .then(show => {
+                db.User
+                    .findByIdAndUpdate(
+                        userID,
+                        { $pull: { watchList: show._id } },
+                        { new: true }
+                    )
+                .then(
+                    res.json({
+                        watchlist: "User Removed from Watchlist",
+                        user: "Show removed from user watchlist"
+                    })
+                )
+                .catch(err => res.status(422).json(err));
+            })
     },
 }
