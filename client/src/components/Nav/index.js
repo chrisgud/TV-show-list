@@ -1,6 +1,7 @@
 // client.src.Nav.index.js
 
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withStyles, MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
@@ -96,18 +97,19 @@ class TemporaryDrawer extends React.Component {
         </List>
         <Divider />
         <List>
-          {["Account Settings", "Profile", "Logout"].map((text, index) => (
-            <ListItem button key={text}>
-              {/* <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon> */}
-              <ListItemText primary={text} />
-            </ListItem>
+          {["Account Settings", "Profile", (this.props.isAuth) ? "Logout" : "Login"].map((text, index) => (
+            <Link to={`/${text}`}>
+              <ListItem button key={text}>
+                {/* <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon> */}
+                <ListItemText primary={text} />
+              </ListItem>
+            </Link>
           ))}
         </List>
       </div>
     );
-
     return (
       <div>
         <MuiThemeProvider theme={theme}>
@@ -156,4 +158,8 @@ TemporaryDrawer.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(TemporaryDrawer);
+const mapStateToProps = state => ({
+  isAuth: state.auth.isAuthenticated
+});
+
+export default connect(mapStateToProps)(withStyles(styles)(TemporaryDrawer));
