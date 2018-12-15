@@ -108,42 +108,117 @@ module.exports = {
     addToWatchlist: function (req, res) {
         const userID = req.user.id;
 
-        db.Show
-            .create({
-                usersWhoHaveOnWatchlist: userID,
-                show: req.body.show
-            })
-            .then(dbShow => db.User.findByIdAndUpdate(req.user.id,
-                { $push: { watchList: dbShow._id } },
-                { new: true })
-            )
-            .then(updatedUser => {
-                res.json(updatedUser);
-            })
-            .catch(error => {
-                res.json(error);
+        // See if the show exists in the Show Collection
+        db.Show.findOne({ show: req.body.show })
+            .then(show => {
+                console.log(show._id)
+                // If the show exists, stringify the list of users who have included
+                if (show) {
+                    showWatchlistUsers = JSON.stringify(show.usersWhoHaveOnWatchlist);
+
+                    // If the user has included it already send back message.
+                    if (showWatchlistUsers.includes(userID)) {
+                        res.send("User already has on Watch list")
+                        // The check the show's _id is on their watchlist
+                        db.User.findByIdAndUpdate(userID,
+
+                        )
+                    } else {
+                        // If user is not already on 
+                        db.Show.findOneAndUpdate(
+                            // Search for the show object being pushed
+                            //TODO: search only for the show.id value
+                            {
+                                show: req.body.show
+                            },
+                            // Push the user's ID to the "Has on watchlist" array
+                            { $push: { usersWhoHaveOnWatchlist: userID } }
+                        )
+                            .then(initialSearchRes => {
+                                console.log(initialSearchRes);
+                                res.send(initialSearchRes);
+                            })
+                    }
+                    // If the show does not exist, add to the database
+                } else {
+                    db.Show
+                        .create({
+                            usersWhoHaveOnWatchlist: userID,
+                            show: req.body.show
+                        })
+                        // After it is added, add the show's ID to the user's watchlist
+                        .then(dbShow => db.User.findByIdAndUpdate(userID,
+                            { $push: { watchList: dbShow._id } },
+                            { new: true })
+                        )
+                        .then(updatedUser => {
+                            res.json(updatedUser);
+                        })
+                        .catch(error => {
+                            res.json(error);
+                        })
+                }
             })
     },
+
+
+    //First find if the show is in the database
+    // db.Show.findOneAndUpdate(
+    //     // Search for the show object being pushed
+    //     //TODO: search only for the show.id value
+    //     {
+    //         show: req.body.show
+    //     },
+    //     // Push the user's ID to the 
+    //     { $push: { usersWhoHaveOnWatchlist: userID } }
+    // )
+    //     .then(initialSearchRes => {
+
+    //         if (!initialSearchRes) {
+    //             // res.send("BLAH")
+    //             db.Show
+    //                 .create({
+    //                     usersWhoHaveOnWatchlist: userID,
+    //                     show: req.body.show
+    //                 })
+    //                 .then(dbShow => db.User.findByIdAndUpdate(req.user.id,
+    //                     { $push: { watchList: dbShow._id } },
+    //                     { new: true })
+    //                 )
+    //                 .then(updatedUser => {
+    //                     res.json(updatedUser);
+    //                 })
+    //                 .catch(error => {
+    //                     res.json(error);
+    //                 })
+    //         }
+    //         else {
+
+    //             res.send(initialSearchRes);
+
+    //         }
+    //     }
+    //     )
 
     //Control for adding to favorites
     addToFavorites: function (req, res) {
         const userID = req.user.id;
-
-        db.Show
-            .create({
-                usersWhoHaveFavorited: userID,
-                show: req.body.show
-            })
-            .then(dbShow => db.User.findByIdAndUpdate(req.user.id,
-                { $push: { favoritedShows: dbShow._id } },
-                { new: true })
-            )
-            .then(updatedUser => {
-                res.json(updatedUser);
-            })
-            .catch(error => {
-                res.json(error);
-            })
+        console.log(req.body.show)
+        // db.Show
+        //     .create({
+        //         usersWhoHaveFavorited: userID,
+        //         show: req.body.show
+        //     })
+        //     .then(dbShow => db.User.findByIdAndUpdate(req.user.id,
+        //         { $push: { favoritedShows: dbShow._id } },
+        //         { new: true })
+        //     )
+        //     .then(updatedUser => {
+        //         res.json(updatedUser);
+        //     })
+        //     .catch(error => {
+        //         res.json(error);
+        //     })
     },
 
     //Control for pulling the current user

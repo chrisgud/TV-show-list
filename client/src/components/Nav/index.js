@@ -84,7 +84,11 @@ class TemporaryDrawer extends React.Component {
         <div className={classes.root} id="navBar">
           <AppBar position="static">
             <Toolbar className={classes.navBar}>
-              <IconButton className={classes.LineWeight} color="inherit" aria-label="Menu">
+              <IconButton
+                className={classes.LineWeight}
+                color="inherit"
+                aria-label="Menu"
+              >
                 <LineWeight />
               </IconButton>
               <Typography variant="h3" color="inherit" className={classes.grow}>
