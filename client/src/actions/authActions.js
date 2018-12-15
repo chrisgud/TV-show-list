@@ -76,7 +76,7 @@ export const getCurrentUser = () => dispatch => {
 export const getCurrentUserFavoriteShows = () => dispatch => {
     dispatch(setUserLoading());
     axios
-        .get("/api/users/currentUserFavortiedShows")
+        .get("/api/users/currentUser/favorites")
         .then(res =>
             dispatch({
                 type: GET_CURRENT_USER,
@@ -95,7 +95,7 @@ export const getCurrentUserFavoriteShows = () => dispatch => {
 export const getCurrentUsersWatchList = () => dispatch => {
     dispatch(setUserLoading());
     axios
-        .get("/api/users/currentUserWatchlist")
+        .get("/api/users/currentUser/watchlist")
         .then(res =>
             dispatch({
                 type: GET_CURRENT_USER,
@@ -114,7 +114,7 @@ export const getCurrentUsersWatchList = () => dispatch => {
 export const postToUserWatchList = (showData) => dispatch => {
     dispatch(setUserLoading());
     axios
-        .post("/api/users/currentUserWatchlist", showData)
+        .post("/api/users/currentUser/watchlist", showData)
         .then(res =>
             dispatch({
                 type: GET_CURRENT_USER,
