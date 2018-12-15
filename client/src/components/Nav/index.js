@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
+import { withStyles, MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
-import LineWeight from '@material-ui/icons/LineWeight';
+import TouchApp from '@material-ui/icons/TouchApp';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
@@ -16,6 +16,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 //import MailIcon from "@material-ui/icons/Mail";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+import 'typeface-unlock';
 
 const styles = {
   list: {
@@ -28,17 +29,33 @@ const styles = {
     flexGrow: 1
   },
   grow: {
-    flexGrow: 1
+    flexGrow: 1,
+    backgroundColor: "white",
+    borderRadius: "15px 50px",
+    paddingLeft: "0.5em",
+    // fontFamily: "-apple-system"
   },
   menuButton: {
     marginLeft: -12,
     marginRight: 20
   },
   navBar: {
-    backgroundColor: "#C3073F",
+    backgroundImage: "linear-gradient(45deg, #C3073F, #960731)",
     height: "6em"
+  },
+  icon: {
+    fontSize: "48px"
   }
 };
+
+const theme = createMuiTheme({
+  typography: {
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      'Unlock'
+    ].join(','),
+  },
+});
 
 class TemporaryDrawer extends React.Component {
   state = {
@@ -90,14 +107,15 @@ class TemporaryDrawer extends React.Component {
 
     return (
       <div>
+        <MuiThemeProvider theme={theme}>
         <div className={classes.root} id="navBar">
           <AppBar position="static">
             <Toolbar className={classes.navBar}>
-              <IconButton className={classes.LineWeight} color="inherit" aria-label="Menu">
-                <LineWeight />
+              <IconButton className={classes.TouchApp} color="inherit" aria-label="Menu">
+                <TouchApp className={classes.icon} />
               </IconButton>
-              <Typography variant="h3" color="inherit" className={classes.grow}>
-                VIST
+              <Typography variant="h2" color="black" className={classes.grow}>
+                Welcome to VIST
               </Typography>
               <Button
                 variant="contained"
@@ -109,6 +127,7 @@ class TemporaryDrawer extends React.Component {
             </Toolbar>
           </AppBar>
         </div>
+        </MuiThemeProvider>
         <Drawer
           open={this.state.left}
           onClose={this.toggleDrawer("left", false)}
