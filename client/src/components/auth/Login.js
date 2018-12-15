@@ -8,8 +8,10 @@ import classnames from "classnames";
 import Card from '@material-ui/core/Card';
 
 const cardStyle = {
-  width: 400,
-  margin: "auto"
+  width: 450,
+  margin: "auto",
+  marginTop: 30,
+  padding: 30
 }
 
 class Login extends Component {
@@ -69,10 +71,6 @@ class Login extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col s8">
-                        <Link to="/" className="btn-flat waves-effect">
-                            <i className="material-icons left">keyboard_backspace</i> Back to
-                            home
-                        </Link>
                         <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                             <h4>
                                 <b>Login</b>
@@ -93,8 +91,8 @@ class Login extends Component {
                                         invalid: errors.email || errors.emailnotfound
                                     })}
                                 />
+                                <span>   </span>
                                 <label htmlFor="email">Email</label>
-                                {/* Spans that will handle any error received from the login server */}
                                 <span className="red-text">
                                     {errors.email}
                                     {errors.emailnotfound}
@@ -111,6 +109,7 @@ class Login extends Component {
                                         invalid: errors.password || errors.passwordincorrect
                                     })}
                                 />
+                                <span>   </span>
                                 <label htmlFor="password">Password</label>
 
                                 {/* Spans that will handle any error received from the login server */}
@@ -120,17 +119,16 @@ class Login extends Component {
                                 </span>
 
                             </div>
-                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                            <div className="col s12" style={{ marginTop: "10px", paddingLeft: "11.250px" }}>
                                 <button
                                     style={{
-                                        width: "150px",
-                                        borderRadius: "3px",
-                                        letterSpacing: "1.5px",
-                                        marginTop: "1rem"
+                                      color: "white",
+                                      backgroundColor: "#007bff",
+                                      fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"`
                                     }}
                                     type="submit"
-                                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                                >Login
+                                    className="btn btn-large"
+                                >Log In
                                 </button>
                             </div>
                         </form>

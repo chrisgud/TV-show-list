@@ -4,6 +4,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
+import Card from '@material-ui/core/Card';
+
+const cardStyle = {
+  width: 450,
+  margin: "auto",
+  marginTop: 30,
+  padding: 30
+}
 
 class Register extends Component {
 
@@ -55,16 +63,15 @@ class Register extends Component {
     render() {
         const { errors } = this.state;
         return (
+            <Card
+              style={cardStyle}
+            >
             <div className="container">
                 <div className="row">
-                    <div className="col s8 offset-s2">
-                        <Link to="/" className="btn-flat waves-effect">
-                            <i className="material-icons left">keyboard_backspace</i> Back to
-                            home
-            </Link>
+                    <div className="col s8">
                         <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                             <h4>
-                                <b>Register</b> below
+                                <b>Register</b>
                             </h4>
                             <p className="grey-text text-darken-1">
                                 Already have an account? <Link to="/login">Log in</Link>
@@ -82,6 +89,7 @@ class Register extends Component {
                                         invalid: errors.name
                                     })}
                                 />
+                                <span>   </span>
                                 <label htmlFor="name">Name</label>
                                 <span className="red-text">{errors.name}</span>
                             </div>
@@ -96,6 +104,7 @@ class Register extends Component {
                                         invalid: errors.email
                                     })}
                                 />
+                                <span>   </span>
                                 <label htmlFor="email">Email</label>
                                 <span className="red-text">{errors.email}</span>
                             </div>
@@ -110,6 +119,7 @@ class Register extends Component {
                                         invalid: errors.password
                                     })}
                                 />
+                                <span>   </span>
                                 <label htmlFor="password">Password</label>
                                 <span className="red-text">{errors.password}</span>
                             </div>
@@ -124,27 +134,27 @@ class Register extends Component {
                                         invalid: errors.password2
                                     })}
                                 />
+                                <span>   </span>
                                 <label htmlFor="password2">Confirm Password</label>
                                 <span className="red-text">{errors.password2}</span>
                             </div>
-                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                            <div className="col s12" style={{ marginTop: "10px", paddingLeft: "11.250px" }}>
                                 <button
                                     style={{
-                                        width: "150px",
-                                        borderRadius: "3px",
-                                        letterSpacing: "1.5px",
-                                        marginTop: "1rem"
+                                        color: "white",
+                                        backgroundColor: "#007bff",
+                                        fontFamily: `-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"`
                                     }}
                                     type="submit"
-                                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                                    className="btn btn-large"
                                 >Sign up
-                                                        Sign up
                                 </button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+            </Card>
         );
     }
 }
