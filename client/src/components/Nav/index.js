@@ -50,6 +50,7 @@ const styles = {
 
 const theme = createMuiTheme({
   typography: {
+    useNextVariants: true,
     // Use the system font instead of the default Roboto font.
     fontFamily: [
       'Unlock'
@@ -115,7 +116,7 @@ class TemporaryDrawer extends React.Component {
               <IconButton className={classes.TouchApp} color="inherit" aria-label="Menu">
                 <TouchApp className={classes.icon} />
               </IconButton>
-              <Typography variant="h2" color="black" className={classes.grow}>
+              <Typography variant="h2" color="textPrimary"  align="center" className={classes.grow}>
                 Welcome to VIST
               </Typography>
               <Button
