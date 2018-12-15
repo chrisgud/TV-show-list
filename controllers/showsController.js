@@ -2,6 +2,7 @@ const db = require("../models");
 
 // Defining methods for the ShowsController
 module.exports = {
+  
   findAll: function(req, res) {
     db.Show
       .find(req.query)

@@ -54,7 +54,7 @@ function App() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/search" component={Search} />
-            <Route exact path="/watch-list" component={WatchList} />
+            <PrivateRoute exact path="/watch-list" component={WatchList} />
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
             <Route component={NoMatch} />
           </Switch>
