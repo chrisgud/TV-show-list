@@ -14,6 +14,30 @@ router
         usersController.currentUser
     )
 
+// @route GET api/users/currentUser/favorites
+// @desc Return current user
+// @access Private
+router
+    .route("/favorites")
+    .get(
+        passport.authenticate("jwt", { session: false }),
+        usersController.currentUserFavoritedShows
+    )
+    .post(
+        passport.authenticate("jwt", { session: false }),
+        usersController.addToFavorites
+    )
+
+// @route GET api/users/currentUser/search
+// @desc Return current user
+// @access Private
+router
+    .route("/search")
+    .get(
+        passport.authenticate("jwt", { session: false }),
+        usersController.currentUserSearchResponse
+    )
+
 // @route GET/POST api/users/currentUser/watchlist
 // @desc Return current user
 // @access Private
@@ -28,22 +52,8 @@ router
         usersController.addToWatchlist
     )
     .put(
-        passport.authenticate("jwt", {session: false}),
+        passport.authenticate("jwt", { session: false }),
         usersController.currentUserRemoveFromWatchlist
-    )
-
-// @route GET api/users/currentUser/favorites
-// @desc Return current user
-// @access Private
-router
-    .route("/favorites")
-    .get(
-        passport.authenticate("jwt", { session: false }),
-        usersController.currentUserFavoritedShows
-    )
-    .post(
-        passport.authenticate("jwt", { session: false }),
-        usersController.addToFavorites
     )
 
 module.exports = router;

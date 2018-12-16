@@ -442,25 +442,49 @@ module.exports = {
     currentUserRemoveFromWatchlist: function (req, res) {
         const userID = req.user.id;
 
+        // Find show and pull the user's ID from the show's watchlist
         db.Show.findOneAndUpdate(
             { show: req.body.show },
             { $pull: { usersWhoHaveOnWatchlist: userID } },
             { new: true }
-            )
+        )
             .then(show => {
+                // Then find user and pull the show's ID from the 
                 db.User
                     .findByIdAndUpdate(
                         userID,
                         { $pull: { watchList: show._id } },
                         { new: true }
                     )
-                .then(
-                    res.json({
-                        watchlist: "User Removed from Watchlist",
-                        user: "Show removed from user watchlist"
-                    })
-                )
-                .catch(err => res.status(422).json(err));
+                    .then(
+                        res.json({
+                            watchlist: "User Removed from Watchlist",
+                            user: "Show removed from user watchlist"
+                        })
+                    )
+                    .catch(err => res.status(422).json(err));
             })
     },
+
+    currentUserSearchResponse: function (req, res) {
+        const userID = req.user.id;
+
+        db.User
+            .findById(userID)
+            // .populate("favoritedShows", "show")
+            .populate("watchList", "show")
+            .then(populatedUser => {
+                watchlistShowIdArray = [];
+
+                const usersWatchlist = populatedUser.watchList;
+                // res.json(typeof usersWatchlist[0]);
+
+                for (i of usersWatchlist) {
+                    // console.log(usersWatchlist[i])
+                    watchlistShowIdArray.push(i.show.id);
+                }
+
+                res.send(watchlistShowIdArray)
+            })
+    }
 }

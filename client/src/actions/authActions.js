@@ -72,6 +72,25 @@ export const getCurrentUser = () => dispatch => {
         );
 };
 
+// Get user's current watchlist data on the search list
+export const searchUserId = () => dispatch => {
+    dispatch(setUserLoading());
+    axios
+        .get("/api/users/currentUser/search")
+        .then(res =>
+            dispatch({
+                type: GET_CURRENT_USER,
+                payload: res.data
+            })
+        )
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
+
 // Get current user with Favorited Shows
 export const getCurrentUserFavoriteShows = () => dispatch => {
     dispatch(setUserLoading());
@@ -132,7 +151,7 @@ export const postToUserWatchList = (showData) => dispatch => {
 // Remove shows from watchlist
 export const removeFromUserWatchList = (showData) => dispatch => {
     dispatch(setUserLoading());
-    axios  
+    axios
         .put("/api/users/currentUser/watchlist", showData)
         .then(res =>
             dispatch({
@@ -140,7 +159,7 @@ export const removeFromUserWatchList = (showData) => dispatch => {
                 payload: res.data
             })
         )
-        .catch(err => 
+        .catch(err =>
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
