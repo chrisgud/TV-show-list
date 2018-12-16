@@ -439,6 +439,7 @@ module.exports = {
             });
     },
 
+    // Control for removing from a user's watchlist
     currentUserRemoveFromWatchlist: function (req, res) {
         const userID = req.user.id;
 
@@ -466,6 +467,7 @@ module.exports = {
             })
     },
 
+    // Control for pulling a user's needed data for the search function
     currentUserSearchResponse: function (req, res) {
         const userID = req.user.id;
 
