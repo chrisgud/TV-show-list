@@ -52,6 +52,7 @@ class Grid extends Component {
   }
 
   componentDidMount() {
+    // this.props.getCurrentUser();
     this.props.searchUserInfo();
   }
 
@@ -88,24 +89,37 @@ class Grid extends Component {
             onClick={() => this.handleOpen(result)}
           >
             {result.show.image ? (
-              <img style={imgStyle} src={result.show.image.medium} alt={result.show.name} />
+              <img
+                style={imgStyle}
+                src={result.show.image.medium}
+                alt={result.show.name}
+              />
             ) : (
-                <img style={imgStyle} src="https://cdn1.iconfinder.com/data/icons/media-exercise-and-cool-stuff/500/TV_white-512.png" alt={result.show.name} layout-fill="true" />
-              )}
+                <img style={imgStyle}
+                  src="https://cdn1.iconfinder.com/data/icons/media-exercise-and-cool-stuff/500/TV_white-512.png"
+                  alt={result.show.name}
+                  layout-fill="true"
+                />
+              )}isAuthenticated
             <GridListTileBar
               title={result.show.name}
-              subtitle={<span>{moment(result.show.premiered).format('YYYY')} {result.show.network ? (<span>• {result.show.network.name}</span>) : (null)}</span>}
+              subtitle={<span>{moment(result.show.premiered).format('YYYY')} {result.show.network 
+                ? (<span>• {result.show.network.name}</span>) : (null)}</span>}
               actionIcon={
                 <IconButton color="secondary" className="">
-                  {this.props.auth.profile.includes(result.show.id) ? (
-                    <RemoveIcon
-                      onClick={() => this.removeFromWatchListButtonFunction(result)}
-                    />
-                  ) : (
-                  <AddIcon
-                    onClick={() => this.addToWatchList(result)}
-                  />
-                  )}
+                  {
+                    this.props.auth.isAuthenticated === true
+                      && this.props.auth.profile.includes(result.show.id) 
+                      ?(
+                        <RemoveIcon
+                          onClick={() => this.removeFromWatchListButtonFunction(result)}
+                        />
+                      ) :
+                      (
+                        <AddIcon
+                          onClick={() => this.addToWatchList(result)}
+                        />
+                      )}
                 </IconButton>
               }
             />
@@ -152,7 +166,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { 
+  {
     postToUserWatchList,
     removeFromUserWatchList,
     searchUserInfo,

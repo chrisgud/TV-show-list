@@ -311,7 +311,7 @@ module.exports = {
                             // Search for the show object being pushed
                             //TODO: search only for the show.id value
                             {
-                                show: req.body.show
+                                "show.id": req.body.show.id
                             },
                             // Push the user's ID to the "Has on favorites" array
                             { $push: { usersWhoHaveFavorited: userID } }
@@ -445,7 +445,10 @@ module.exports = {
 
         // Find show and pull the user's ID from the show's watchlist
         db.Show.findOneAndUpdate(
-            { show: req.body.show },
+            {
+                "show.id": req.body.show.id
+
+            },
             { $pull: { usersWhoHaveOnWatchlist: userID } },
             { new: true }
         )
@@ -465,6 +468,7 @@ module.exports = {
                     )
                     .catch(err => res.status(422).json(err));
             })
+            .catch(err => res.status(422).json(err))
     },
 
     // Control for pulling a user's needed data for the search function
