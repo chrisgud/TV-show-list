@@ -13,8 +13,12 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
+
 import {
-  postToUserWatchList
+  postToUserWatchList,
+  removeFromUserWatchList,
+  searchUserInfo,
 } from "../../actions/authActions";
 import "./style.css";
 
@@ -47,6 +51,10 @@ class Grid extends Component {
     currentResult: ''
   }
 
+  componentDidMount() {
+    this.props.searchUserInfo();
+  }
+
   handleOpen = result => {
     this.setState({ open: true, currentResult: result });
   }
@@ -56,8 +64,11 @@ class Grid extends Component {
   }
 
   addToWatchList = show => {
-    console.log(show)
-    this.props.postToUserWatchList(show)
+    this.props.postToUserWatchList(show, this.props.searchUserInfo)
+  }
+
+  removeFromWatchListButtonFunction = show => {
+    this.props.removeFromUserWatchList(show, this.props.searchUserInfo)
   }
 
   render() {
@@ -86,9 +97,15 @@ class Grid extends Component {
               subtitle={<span>{moment(result.show.premiered).format('YYYY')} {result.show.network ? (<span>• {result.show.network.name}</span>) : (null)}</span>}
               actionIcon={
                 <IconButton color="secondary" className="">
+                  {this.props.auth.profile.includes(result.show.id) ? (
+                    <RemoveIcon
+                      onClick={() => this.removeFromWatchListButtonFunction(result)}
+                    />
+                  ) : (
                   <AddIcon
                     onClick={() => this.addToWatchList(result)}
                   />
+                  )}
                 </IconButton>
               }
             />
@@ -135,5 +152,9 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { postToUserWatchList }
+  { 
+    postToUserWatchList,
+    removeFromUserWatchList,
+    searchUserInfo,
+  }
 )(Grid);
