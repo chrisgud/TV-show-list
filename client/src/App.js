@@ -60,7 +60,7 @@ function App() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/search" component={Search} />
-            <PrivateRoute exact path="/watch-list" component={WatchList} />
+            <PrivateRoute exact path="/Watchlist" component={WatchList} />
             <PrivateRoute exact path="/profile" component={Dashboard} />
             <Route component={NoMatch} />
           </Switch>
