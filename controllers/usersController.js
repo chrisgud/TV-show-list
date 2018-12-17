@@ -111,7 +111,7 @@ module.exports = {
         const userID = req.user.id;
 
         // See if the show exists in the Show Collection
-        db.Show.findOne({ show: req.body.show })
+        db.Show.findOne({ "show.id": req.body.show.id })
             .then(show => {
                 // If the show exists, stringify the list of users who have included
                 if (show) {
@@ -166,9 +166,8 @@ module.exports = {
                         // If user is not already on show's user Watchlist
                         db.Show.findOneAndUpdate(
                             // Search for the show object being pushed
-                            //TODO: search only for the show.id value
                             {
-                                show: req.body.show
+                                "show.id": req.body.show.id
                             },
                             // Push the user's ID to the "Has on watchlist" array
                             { $push: { usersWhoHaveOnWatchlist: userID } }
@@ -254,7 +253,7 @@ module.exports = {
         const userID = req.user.id;
 
         // See if the show exists in the Show Collection
-        db.Show.findOne({ show: req.body.show })
+        db.Show.findOne({ "show.id": req.body.show.id })
             .then(show => {
                 // If the show exists, stringify the list of users who have included
                 if (show) {
@@ -309,7 +308,6 @@ module.exports = {
                         // If user is not already on show's user favorites
                         db.Show.findOneAndUpdate(
                             // Search for the show object being pushed
-                            //TODO: search only for the show.id value
                             {
                                 "show.id": req.body.show.id
                             },
