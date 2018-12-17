@@ -138,7 +138,7 @@ export const postToUserWatchList = (showData, callback) => dispatch => {
         .post("/api/users/currentUser/watchlist", showData)
         .then(res =>
             dispatch({
-                type: POST_CURRENT_USER_WATCHLIST,
+                type: GET_CURRENT_USER_SEARCH,
                 payload: res.data
             }),
         )

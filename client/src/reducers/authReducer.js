@@ -1,7 +1,10 @@
+// client.src.reducers.authReducers.js
+
 import {
     SET_CURRENT_USER,
     USER_LOADING,
-    GET_CURRENT_USER
+    GET_CURRENT_USER,
+    GET_CURRENT_USER_SEARCH,
 } from "../actions/types";
 
 const isEmpty = require("is-empty");
@@ -29,6 +32,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 profile: action.payload,
+                loading: false
+            };
+        case GET_CURRENT_USER_SEARCH:
+            return {
+                ...state,
+                response: action.payload,
                 loading: false
             };
         default:

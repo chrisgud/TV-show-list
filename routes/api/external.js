@@ -1,4 +1,5 @@
-const axios = require("axios");
+// routes.api.external.js
+
 const router = require("express").Router();
 const externalController = require("../../controllers/externalController");
 
