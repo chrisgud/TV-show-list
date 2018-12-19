@@ -14,6 +14,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
 import {
   postToUserWatchList,
@@ -25,7 +26,8 @@ import "./style.css";
 const moment = require('moment');
 
 const gridTileStyle = {
-  backgroundColor: 'black'
+  backgroundColor: 'black',
+  maxWidth: 400
 }
 
 const dialogStyle = {
@@ -48,12 +50,28 @@ const imgStyle = {
 class Grid extends Component {
   state = {
     open: false,
-    currentResult: ''
+    currentResult: '',
+    columnSize: 7
   }
 
   componentDidMount() {
     // this.props.getCurrentUser();
     this.props.searchUserInfo();
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1200) {
+        this.setState({columnSize: 7});
+      }
+      if (1200 >= window.innerWidth && window.innerWidth > 992) {
+        this.setState({columnSize: 5});
+      }
+      if (992 >= window.innerWidth && window.innerWidth > 768) {
+        this.setState({columnSize: 3});
+      }
+      if (window.innerWidth < 768) {
+        this.setState({columnSize: 1});
+      }
+    })
   }
 
   handleOpen = result => {
@@ -79,7 +97,9 @@ class Grid extends Component {
     ]
 
     return (
-      <GridList cols={7}>
+      <GridList 
+        cols = {this.state.columnSize}
+      >
 
         {shows.map(result => (
           <GridListTile
