@@ -1,3 +1,5 @@
+// client.src.reducers.errorReducer.js
+
 import { GET_ERRORS } from "../actions/types";
 
 const initialState = {};

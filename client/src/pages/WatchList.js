@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import TVShowGrid from "../components/TVShowGrid";
-// import { logoutUser, getCurrentUser, getCurrentUsersWatchList, getCurrentUserFavoriteShows } from "../actions/authActions";
+import Watching from '../components/WatchList/Watching'
+import Watched from '../components/WatchList/Watched'
+import WantToWatch from '../components/WatchList/WantToWatch'
+import { connect } from "react-redux";
+
+import { getCurrentUsersWatchList } from "../actions/authActions";
 
 const theme = createMuiTheme({
   typography: {
@@ -12,24 +16,35 @@ const theme = createMuiTheme({
 class WatchList extends Component {
   state = {
     results: [
-      {
-        title: "The Office",
-        years: "2006-2014",
-        image: "https://img.nbc.com/sites/nbcunbc/files/files/images/2016/1/19/MDot-TheOffice-640x360-MP.jpg",
-        network: "NBC"
-      }
+      
     ]
   };
+
+  componentDidMount() {
+    this.props.getCurrentUsersWatchList();
+  }
 
   render() {
     return (
       <MuiThemeProvider theme={theme}>
         <div>
-          <TVShowGrid results={this.state.results}/>
+          <br />
+          <Watching />
+          <br />
+          <WantToWatch />
+          <br />
+          <Watched />
         </div>
       </MuiThemeProvider>
     );
   }
 }
 
-export default WatchList;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { getCurrentUsersWatchList }
+)(WatchList);

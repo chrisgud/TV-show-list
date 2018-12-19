@@ -13,15 +13,21 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
+
 import {
-  postToUserWatchList
+  postToUserWatchList,
+  removeFromUserWatchList,
+  searchUserInfo,
 } from "../../actions/authActions";
 import "./style.css";
 
 const moment = require('moment');
 
 const gridTileStyle = {
-  backgroundColor: 'black'
+  backgroundColor: 'black',
+  maxWidth: 400
 }
 
 const dialogStyle = {
@@ -44,7 +50,28 @@ const imgStyle = {
 class Grid extends Component {
   state = {
     open: false,
-    currentResult: ''
+    currentResult: '',
+    columnSize: 7
+  }
+
+  componentDidMount() {
+    // this.props.getCurrentUser();
+    this.props.searchUserInfo();
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1200) {
+        this.setState({columnSize: 7});
+      }
+      if (1200 >= window.innerWidth && window.innerWidth > 992) {
+        this.setState({columnSize: 5});
+      }
+      if (992 >= window.innerWidth && window.innerWidth > 768) {
+        this.setState({columnSize: 3});
+      }
+      if (window.innerWidth < 768) {
+        this.setState({columnSize: 1});
+      }
+    })
   }
 
   handleOpen = result => {
@@ -56,8 +83,11 @@ class Grid extends Component {
   }
 
   addToWatchList = show => {
-    console.log(show)
-    this.props.postToUserWatchList(show)
+    this.props.postToUserWatchList(show, this.props.searchUserInfo)
+  }
+
+  removeFromWatchListButtonFunction = show => {
+    this.props.removeFromUserWatchList(show, this.props.searchUserInfo)
   }
 
   render() {
@@ -67,7 +97,9 @@ class Grid extends Component {
     ]
 
     return (
-      <GridList cols={7}>
+      <GridList 
+        cols = {this.state.columnSize}
+      >
 
         {shows.map(result => (
           <GridListTile
@@ -77,18 +109,37 @@ class Grid extends Component {
             onClick={() => this.handleOpen(result)}
           >
             {result.show.image ? (
-              <img style={imgStyle} src={result.show.image.medium} alt={result.show.name} />
+              <img
+                style={imgStyle}
+                src={result.show.image.medium}
+                alt={result.show.name}
+              />
             ) : (
-                <img style={imgStyle} src="https://cdn1.iconfinder.com/data/icons/media-exercise-and-cool-stuff/500/TV_white-512.png" alt={result.show.name} layout-fill="true" />
-              )}
+                <img style={imgStyle}
+                  src="https://cdn1.iconfinder.com/data/icons/media-exercise-and-cool-stuff/500/TV_white-512.png"
+                  alt={result.show.name}
+                  layout-fill="true"
+                />
+              )}isAuthenticated
             <GridListTileBar
               title={result.show.name}
-              subtitle={<span>{moment(result.show.premiered).format('YYYY')} {result.show.network ? (<span>• {result.show.network.name}</span>) : (null)}</span>}
+              subtitle={<span>{moment(result.show.premiered).format('YYYY')} {result.show.network 
+                ? (<span>• {result.show.network.name}</span>) : (null)}</span>}
               actionIcon={
                 <IconButton color="secondary" className="">
-                  <AddIcon
-                    onClick={() => this.addToWatchList(result)}
-                  />
+                  {
+                    this.props.auth.isAuthenticated === true
+                      && this.props.auth.profile.includes(result.show.id) 
+                      ?(
+                        <RemoveIcon
+                          onClick={() => this.removeFromWatchListButtonFunction(result)}
+                        />
+                      ) :
+                      (
+                        <AddIcon
+                          onClick={() => this.addToWatchList(result)}
+                        />
+                      )}
                 </IconButton>
               }
             />
@@ -135,5 +186,9 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { postToUserWatchList }
+  {
+    postToUserWatchList,
+    removeFromUserWatchList,
+    searchUserInfo,
+  }
 )(Grid);

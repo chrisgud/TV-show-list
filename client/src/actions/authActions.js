@@ -4,6 +4,8 @@ import jwt_decode from "jwt-decode";
 import {
     GET_ERRORS,
     GET_CURRENT_USER,
+    GET_CURRENT_USER_SEARCH,
+    POST_CURRENT_USER_WATCHLIST,
     SET_CURRENT_USER,
     USER_LOADING
 } from "./types";
@@ -72,6 +74,25 @@ export const getCurrentUser = () => dispatch => {
         );
 };
 
+// Get user's current watchlist data on the search list
+export const searchUserInfo = () => dispatch => {
+    dispatch(setUserLoading());
+    axios
+        .get("/api/users/currentUser/search")
+        .then(res =>
+            dispatch({
+                type: GET_CURRENT_USER,
+                payload: res.data
+            })
+        )
+        .catch(err =>
+            dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        );
+};
+
 // Get current user with Favorited Shows
 export const getCurrentUserFavoriteShows = () => dispatch => {
     dispatch(setUserLoading());
@@ -111,16 +132,17 @@ export const getCurrentUsersWatchList = () => dispatch => {
 };
 
 // Post shows to watchlist
-export const postToUserWatchList = (showData) => dispatch => {
+export const postToUserWatchList = (showData, callback) => dispatch => {
     dispatch(setUserLoading());
     axios
         .post("/api/users/currentUser/watchlist", showData)
         .then(res =>
             dispatch({
-                type: GET_CURRENT_USER,
+                type: GET_CURRENT_USER_SEARCH,
                 payload: res.data
-            })
+            }),
         )
+        .then(res2 => callback())
         .catch(err =>
             dispatch({
                 type: GET_ERRORS,
@@ -130,17 +152,18 @@ export const postToUserWatchList = (showData) => dispatch => {
 };
 
 // Remove shows from watchlist
-export const removeFromUserWatchList = (showData) => dispatch => {
+export const removeFromUserWatchList = (showData, callback) => dispatch => {
     dispatch(setUserLoading());
-    axios  
+    axios
         .put("/api/users/currentUser/watchlist", showData)
         .then(res =>
             dispatch({
-                type: GET_CURRENT_USER,
+                type: GET_CURRENT_USER_SEARCH,
                 payload: res.data
-            })
+            }),
         )
-        .catch(err => 
+        .then(res2 => callback())
+        .catch(err =>
             dispatch({
                 type: GET_ERRORS,
                 payload: err.response.data
