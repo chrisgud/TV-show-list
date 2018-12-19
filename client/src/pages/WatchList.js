@@ -3,9 +3,9 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import Watching from '../components/WatchList/Watching'
 import Watched from '../components/WatchList/Watched'
 import WantToWatch from '../components/WatchList/WantToWatch'
+import { connect } from "react-redux";
 
-
-// import { logoutUser, getCurrentUser, getCurrentUsersWatchList, getCurrentUserFavoriteShows } from "../actions/authActions";
+import { getCurrentUsersWatchList } from "../actions/authActions";
 
 const theme = createMuiTheme({
   typography: {
@@ -19,6 +19,10 @@ class WatchList extends Component {
       
     ]
   };
+
+  componentDidMount() {
+    this.props.getCurrentUsersWatchList();
+  }
 
   render() {
     return (
@@ -36,4 +40,11 @@ class WatchList extends Component {
   }
 }
 
-export default WatchList;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { getCurrentUsersWatchList }
+)(WatchList);
