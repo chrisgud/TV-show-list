@@ -60,31 +60,37 @@ class Grid extends Component {
   state = {
     open: false,
     currentResult: '',
-    columnSize: 7
+    columnSize: 0
   }
 
   componentDidMount() {
     // this.props.getCurrentUser();
     this.props.searchUserInfo();
 
+    this.checkScreenSize();
+
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 1200) {
-        this.setState({columnSize: 7});
-      }
-      if (1200 >= window.innerWidth && window.innerWidth > 992) {
-        this.setState({columnSize: 5});
-      }
-      if (992 >= window.innerWidth && window.innerWidth > 768) {
-        this.setState({columnSize: 3});
-      }
-      if (window.innerWidth < 768) {
-        this.setState({columnSize: 1});
-      }
+      this.checkScreenSize();
     })
   }
 
   handleOpen = result => {
     this.setState({ open: true, currentResult: result });
+  }
+
+  checkScreenSize = () => {
+    if (window.innerWidth > 1200) {
+      this.setState({columnSize: 7});
+    }
+    if (1200 >= window.innerWidth && window.innerWidth > 992) {
+      this.setState({columnSize: 5});
+    }
+    if (992 >= window.innerWidth && window.innerWidth > 768) {
+      this.setState({columnSize: 3});
+    }
+    if (window.innerWidth < 768) {
+      this.setState({columnSize: 1});
+    }
   }
 
   handleClose = () => {
