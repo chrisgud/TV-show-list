@@ -119,19 +119,28 @@ class TemporaryDrawer extends React.Component {
             <AppBar position="static">
               <Toolbar className={classes.navBar}>
 
-                <IconButton className={classes.TouchApp} color="inherit" aria-label="Menu">
+                {/* <IconButton className={classes.TouchApp} color="inherit" aria-label="Menu">
                   <TouchApp className={classes.icon} />
-                </IconButton>
-                <Typography variant="h2" color="textPrimary" align="center" className={classes.grow}>
-                  Welcome to VIST
-              </Typography>
-                <div style={{ marginLeft: 20 }}>
-                  <Button
+                </IconButton> */}
+                <Button
                     color="inherit"
                     onClick={this.toggleDrawer("left", true)}
                   >
                     Menu
-                  </Button>
+                </Button>
+                <Typography variant="h2" color="textPrimary" align="center" className={classes.grow}>
+                  Welcome to VIST
+              </Typography>
+                <div style={{ marginLeft: 20 }}>
+                  {/* <Button
+                    color="inherit"
+                    onClick={this.toggleDrawer("left", true)}
+                  >
+                    Menu
+                  </Button> */}
+                 <IconButton className={classes.TouchApp} color="inherit" aria-label="Menu">
+                  <TouchApp className={classes.icon} />
+                </IconButton>
                 </div>
               </Toolbar>
             </AppBar>
