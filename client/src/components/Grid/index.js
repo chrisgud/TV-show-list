@@ -14,6 +14,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import InfoIcon from '@material-ui/icons/Info';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
 import {
@@ -45,6 +46,14 @@ const imgStyle = {
   width: 'auto',
   display: 'block',
   margin: 'auto'
+}
+
+const infoIconStyle = {
+  color: 'white'
+}
+
+const titleBarStyle = {
+  background: 'none'
 }
 
 class Grid extends Component {
@@ -106,7 +115,6 @@ class Grid extends Component {
             key={result.show.id}
             id="grid-list-tile"
             style={gridTileStyle}
-            onClick={() => this.handleOpen(result)}
           >
             {result.show.image ? (
               <img
@@ -142,6 +150,20 @@ class Grid extends Component {
                       )}
                 </IconButton>
               }
+            />
+            <GridListTileBar
+              title={""}
+              titlePosition="top"
+              actionIcon={
+                <IconButton>
+                  <InfoIcon
+                    style={infoIconStyle} 
+                    onClick={() => this.handleOpen(result)}
+                  />
+                </IconButton>
+              }
+              actionPosition="right"
+              style={titleBarStyle}
             />
           </GridListTile>
         ))}
