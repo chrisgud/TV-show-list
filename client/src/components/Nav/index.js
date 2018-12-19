@@ -86,7 +86,7 @@ class TemporaryDrawer extends React.Component {
     const sideList = (
       <div className={classes.list}>
         <List>
-          {["Home", "Search", "Watchlist", "Favorites"].map((text, index) => (
+          {["Home", "Search", "Watchlist"].map((text, index) => (
             <Link to={`/${text}`}>
               <ListItem button key={text}>
                 {/* <ListItemIcon>
@@ -118,10 +118,6 @@ class TemporaryDrawer extends React.Component {
           <div className={classes.root} id="navBar">
             <AppBar position="static">
               <Toolbar className={classes.navBar}>
-
-                {/* <IconButton className={classes.TouchApp} color="inherit" aria-label="Menu">
-                  <TouchApp className={classes.icon} />
-                </IconButton> */}
                 <Button
                     color="inherit"
                     onClick={this.toggleDrawer("left", true)}
@@ -132,12 +128,6 @@ class TemporaryDrawer extends React.Component {
                   Welcome to VIST
               </Typography>
                 <div style={{ marginLeft: 20 }}>
-                  {/* <Button
-                    color="inherit"
-                    onClick={this.toggleDrawer("left", true)}
-                  >
-                    Menu
-                  </Button> */}
                  <IconButton className={classes.TouchApp} color="inherit" aria-label="Menu">
                   <TouchApp className={classes.icon} />
                 </IconButton>
