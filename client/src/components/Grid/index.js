@@ -142,12 +142,16 @@ class Grid extends Component {
                         <RemoveIcon
                           onClick={() => this.removeFromWatchListButtonFunction(result)}
                         />
-                      ) :
-                      (
-                        <AddIcon
-                          onClick={() => this.addToWatchList(result)}
-                        />
-                      )}
+                      ) : (null)}
+                  {
+                    this.props.auth.isAuthenticated === false ?
+                    (null) :
+                    (
+                      <AddIcon
+                        onClick={() => this.addToWatchList(result)}
+                      />
+                    )
+                  }
                 </IconButton>
               }
             />
