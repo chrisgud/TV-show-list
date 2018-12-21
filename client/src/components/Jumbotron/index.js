@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import firstimage from '../../Images/watching-tv.webp';
 import secondimage from '../../Images/marvel-holiday-2018-ss06.jpg';
 import thirdimage from '../../Images/the-sinner.jpg';
 import fourthimage from '../../Images/fresh-off-the-boat-tv-review.jpg';
 import fifthimage from '../../Images/breaking-bad.jpg';
-import { withStyles, MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { /*withStyles,*/ MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import './style.css';
 
 
