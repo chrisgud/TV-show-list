@@ -30,8 +30,7 @@ const styles = {
   },
   images: {
     width: "100%",
-    height: "auto",
-    maxHeight: window.innerHeight - 150,
+    height: window.innerHeight - 150,
     border: "10px solid black"
   },
   box: {
