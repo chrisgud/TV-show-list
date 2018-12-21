@@ -6,8 +6,14 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
-import InfoIcon from '@material-ui/icons/Info';
+import RemoveIcon from '@material-ui/icons/Remove';
+
 import { connect } from "react-redux";
+
+import {
+  removeFromUserWatchList,
+  searchUserInfo,
+} from "../../actions/authActions";
 
 const styles = theme => ({
   root: {
@@ -28,7 +34,9 @@ const styles = theme => ({
 
 function WatchListGrid(props) {
   const { classes, watchList } = props;
-
+  const removeFromWatchListButtonFunction = show => {
+    props.removeFromUserWatchList(show, props.searchUserInfo)
+  }
   return (
     <div className={classes.root}>
       <GridList cellHeight={180} className={classes.gridList}>
@@ -36,14 +44,14 @@ function WatchListGrid(props) {
           <ListSubheader component="div">Watch List</ListSubheader>
         </GridListTile>
         {watchList.map(show => (
-          <GridListTile key={show.image}>
+          <GridListTile key={show.show.image}>
             {show.show.image ? (
               <img
                 src={show.show.image.medium}
                 alt={show.show.name}
               />
             ) : (
-                <img 
+                <img
                   src="https://cdn1.iconfinder.com/data/icons/media-exercise-and-cool-stuff/500/TV_white-512.png"
                   alt={show.show.name}
                   layout-fill="true"
@@ -53,7 +61,9 @@ function WatchListGrid(props) {
               title={show.show.name}
               actionIcon={
                 <IconButton className={classes.icon}>
-                  <InfoIcon />
+                  <RemoveIcon
+                    onClick={() => removeFromWatchListButtonFunction(show)}
+                  />
                 </IconButton>
               }
             />
@@ -75,7 +85,11 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  {
+    removeFromUserWatchList,
+    searchUserInfo,
+  }
 )(withStyles(styles)(WatchListGrid));
 
 
