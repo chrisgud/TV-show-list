@@ -1,8 +1,7 @@
 import React, { Component } from "react";
+import _ from 'lodash';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import Watching from '../components/WatchList/Watching'
-import Watched from '../components/WatchList/Watched'
-import WantToWatch from '../components/WatchList/WantToWatch'
+import WatchListGrid from '../components/WatchList'
 import { connect } from "react-redux";
 
 import { getCurrentUsersWatchList } from "../actions/authActions";
@@ -14,26 +13,18 @@ const theme = createMuiTheme({
 });
 
 class WatchList extends Component {
-  state = {
-    results: [
-      
-    ]
-  };
-
+  
   componentDidMount() {
     this.props.getCurrentUsersWatchList();
-  }
+  };
 
   render() {
+    const watchList = _.get(this.props, 'auth.profile.watchList', []);
     return (
       <MuiThemeProvider theme={theme}>
         <div>
           <br />
-          <Watching />
-          <br />
-          <WantToWatch />
-          <br />
-          <Watched />
+          <WatchListGrid watchList={watchList} />
         </div>
       </MuiThemeProvider>
     );
@@ -44,7 +35,13 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
+const mapDispatchToProps = dispatch => ({
+  getCurrentUsersWatchList() {
+    dispatch(getCurrentUsersWatchList());
+  }
+})
+
 export default connect(
   mapStateToProps,
-  { getCurrentUsersWatchList }
+  mapDispatchToProps
 )(WatchList);
