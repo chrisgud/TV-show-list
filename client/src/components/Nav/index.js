@@ -100,7 +100,7 @@ class TemporaryDrawer extends React.Component {
         </List>
         <Divider />
         <List>
-          {[/*"Account Settings", */"Profile", (this.props.isAuth) ? "Logout" : "Login"].map((text, index) => (
+          {[/*"Account Settings", */(this.props.isAuth) ? "Logout" : "Login"].map((text, index) => (
             <Link to={`/${text}`} key={text}>
               <ListItem button key={text}>
                 {/* <ListItemIcon>

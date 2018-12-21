@@ -15,7 +15,6 @@ function currentUserRemoveFromWatchlist (req, res) {
         { new: true }
     )
         .then(show => {
-            console.log(show);
             // Then find user and pull the show's ID from the 
             db.User
                 .findByIdAndUpdate(
