@@ -15,7 +15,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import InfoIcon from '@material-ui/icons/Info';
-import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
+// import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
 import {
   postToUserWatchList,
@@ -63,9 +63,15 @@ class Grid extends Component {
     columnSize: 0
   }
 
+  isAuthenticated() {
+    return this.props.auth.isAuthenticated;
+  }
+
   componentDidMount() {
     // this.props.getCurrentUser();
-    this.props.searchUserInfo();
+    if (this.isAuthenticated()) {
+      this.props.searchUserInfo();
+    }
 
     this.checkScreenSize();
 
@@ -80,16 +86,16 @@ class Grid extends Component {
 
   checkScreenSize = () => {
     if (window.innerWidth > 1200) {
-      this.setState({columnSize: 7});
+      this.setState({ columnSize: 7 });
     }
     if (1200 >= window.innerWidth && window.innerWidth > 992) {
-      this.setState({columnSize: 5});
+      this.setState({ columnSize: 5 });
     }
     if (992 >= window.innerWidth && window.innerWidth > 768) {
-      this.setState({columnSize: 3});
+      this.setState({ columnSize: 3 });
     }
     if (window.innerWidth < 768) {
-      this.setState({columnSize: 1});
+      this.setState({ columnSize: 1 });
     }
   }
 
@@ -112,8 +118,8 @@ class Grid extends Component {
     ]
 
     return (
-      <GridList 
-        cols = {this.state.columnSize}
+      <GridList
+        cols={this.state.columnSize}
       >
 
         {shows.map(result => (
@@ -137,26 +143,25 @@ class Grid extends Component {
               )}isAuthenticated
             <GridListTileBar
               title={result.show.name}
-              subtitle={<span>{moment(result.show.premiered).format('YYYY')} {result.show.network 
+              subtitle={<span>{moment(result.show.premiered).format('YYYY')} {result.show.network
                 ? (<span>• {result.show.network.name}</span>) : (null)}</span>}
               actionIcon={
                 <IconButton color="secondary" className="">
                   {
-                    this.props.auth.isAuthenticated === true
-                      && this.props.auth.profile.includes(result.show.id) 
-                      ?(
-                        <RemoveIcon
-                          onClick={() => this.removeFromWatchListButtonFunction(result)}
-                        />
-                      ) : (null)}
-                  {
-                    this.props.auth.isAuthenticated === false ?
-                    (null) :
-                    (
-                      <AddIcon
-                        onClick={() => this.addToWatchList(result)}
-                      />
-                    )
+                    //Is User Authenticated?
+                    this.isAuthenticated() ?
+                      //Does Authenticated User have show on watchlist?
+                      this.props.auth.profile.includes(result.show.id)
+                        ? (
+                          <RemoveIcon
+                            onClick={() => this.removeFromWatchListButtonFunction(result)}
+                          />
+                        ) : (
+                          <AddIcon
+                            onClick={() => this.addToWatchList(result)}
+                          />
+                        )
+                      : (null)
                   }
                 </IconButton>
               }
@@ -167,7 +172,7 @@ class Grid extends Component {
               actionIcon={
                 <IconButton>
                   <InfoIcon
-                    style={infoIconStyle} 
+                    style={infoIconStyle}
                     onClick={() => this.handleOpen(result)}
                   />
                 </IconButton>
