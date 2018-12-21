@@ -61,7 +61,7 @@ function App() {
             <Route exact path="/home" component={Home} />
             <Route exact path="/search" component={Search} />
             <PrivateRoute exact path="/Watchlist" component={WatchList} />
-            <PrivateRoute exact path="/profile" component={Dashboard} />
+            {/* <PrivateRoute exact path="/profile" component={Dashboard} /> */}
             <Route component={NoMatch} />
           </Switch>
         </div>
