@@ -4,7 +4,6 @@ import SearchBar from "../components/SearchBar";
 import API from "../utils/API";
 import { connect } from "react-redux";
 import { searchUserInfo } from "../actions/authActions";
-import debounce from "./lodash/debounce"
 
 const theme = createMuiTheme({
   typography: {
