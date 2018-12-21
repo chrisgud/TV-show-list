@@ -19,6 +19,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 //import MailIcon from "@material-ui/icons/Mail";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
+import "./style.css";
 
 const styles = {
   list: {
@@ -124,9 +125,9 @@ class TemporaryDrawer extends React.Component {
                   >
                     Menu
                 </Button>
-                <Typography variant="h2" color="textPrimary" align="center" className={classes.grow}>
+                <Typography id="title" variant="h2" color="textPrimary" align="center" className={classes.grow}>
                   Welcome to VIST
-              </Typography>
+                </Typography>
                 <div style={{ marginLeft: 20 }}>
                  <IconButton className={classes.TouchApp} color="inherit" aria-label="Menu">
                   <TouchApp className={classes.icon} />

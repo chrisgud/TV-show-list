@@ -4,7 +4,8 @@ import firstimage from '../../Images/watching-tv.webp';
 import secondimage from '../../Images/marvel-holiday-2018-ss06.jpg';
 import thirdimage from '../../Images/the-sinner.jpg';
 import fourthimage from '../../Images/fresh-off-the-boat-tv-review.jpg';
-import fifthimage from '../../Images/breaking-bad.jpg'
+import fifthimage from '../../Images/breaking-bad.jpg';
+import './style.css';
 
 
 const styles = {
@@ -18,7 +19,9 @@ const styles = {
     paddingBottom: "1em"
   },
   images: {
-    height: "48em",
+    width: "100%",
+    height: "auto",
+    maxHeight: window.innerHeight - 150,
     border: "10px solid black"
   },
   box: {
@@ -36,36 +39,36 @@ class Jumbotron extends Component {
           <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img className="d-block w-100" src={firstimage} alt="First slide" style={styles.images} />
-                <div className="carousel-caption d-none d-md-block">
+                <img className="d-block img-responsive" src={firstimage} alt="First slide" style={styles.images} />
+                <div className="carousel-caption d-md-block">
                   <h1 style={styles.header}>Welcome to VIST</h1>
                   <h3 style={styles.description}>Your new favorite TV organizing app</h3>
                 </div>
               </div>
               <div className="carousel-item">
-                <img className="d-block w-100" src={secondimage} alt="Second slide" style={styles.images} />
-                <div className="carousel-caption d-none d-md-block">
+                <img className="d-block img-responsive" src={secondimage} alt="Second slide" style={styles.images} />
+                <div className="carousel-caption d-md-block">
                   <h1 style={styles.header}>Sign Up or Log In</h1>
                   <h3 style={styles.description}>Logging in gives you access to create your own personalized watchlist</h3>
                 </div>
               </div>
               <div className="carousel-item">
-                <img className="d-block w-100" src={thirdimage} alt="Third slide" style={styles.images} />
-                <div className="carousel-caption d-none d-md-block">
+                <img className="d-block img-sresponsive" src={thirdimage} alt="Third slide" style={styles.images} />
+                <div className="carousel-caption d-md-block">
                   <h1 style={styles.header}>Search Our Vast Library</h1>
                   <h3 style={styles.description}>Find any show you can think of in our comprehensive search engine</h3>
                 </div>
               </div>
               <div className="carousel-item">
-                <img className="d-block w-100" src={fourthimage} alt="Fourth slide" style={styles.images} />
-                <div className="carousel-caption d-none d-md-block">
+                <img className="d-block img-responsive" src={fourthimage} alt="Fourth slide" style={styles.images} />
+                <div className="carousel-caption d-md-block">
                   <h1 style={styles.header}>Mobile Friendly Interface</h1>
                   <h3 style={styles.description}>Don't have a computer? VIST works on Android and iPhone</h3>
                 </div>
               </div>
               <div className="carousel-item">
-                <img className="d-block w-100" src={fifthimage} alt="Fifth slide" style={styles.images} />
-                <div className="carousel-caption d-none d-md-block">
+                <img className="d-block img-responsive" src={fifthimage} alt="Fifth slide" style={styles.images} />
+                <div className="carousel-caption d-md-block">
                   <h1 style={styles.header}>Invite Friends to VIST</h1>
                   <h3 style={styles.description}>Invite your friends to VIST and unlock membership perks</h3>
                 </div>
