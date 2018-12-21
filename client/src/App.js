@@ -19,7 +19,7 @@ import TemporaryDrawer from "./components/Nav";
 import Login from "./components/auth/Login"
 import Register from "./components/auth/Register"
 import PrivateRoute from "./components/private-route/PrivateRoute";
-import Dashboard from "./pages/Dashboard";
+//import Dashboard from "./pages/Dashboard";
 
 
 // Check for token to keep user logged in

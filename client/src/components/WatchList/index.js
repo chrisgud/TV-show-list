@@ -46,8 +46,7 @@ function WatchListGrid(props) {
           <h1 id="title">Watch List</h1>
         </GridListTile>
         {watchList.map(show => (
-
-          <GridListTile key={show.show.image}>
+          <GridListTile key={show._id}>
             {show.show.image ? (
               <img
                 src={show.show.image.medium}
