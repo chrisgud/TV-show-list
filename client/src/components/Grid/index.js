@@ -199,10 +199,12 @@ class Grid extends Component {
               >
                 <CardHeader
                   title={this.state.currentResult.show.name}
-                  subheader={<span>{moment(this.state.currentResult.show.premiered).format('YYYY')} {this.state.currentResult.show.network ? (<span>• {this.state.currentResult.show.network.name}</span>) : (null)}</span>}
+                  subheader={<span>{moment(this.state.currentResult.show.premiered).format('YYYY')} 
+                  {this.state.currentResult.show.network ? (<span>• {this.state.currentResult.show.network.name}</span>) : (null)}</span>}
                 />
                 <CardContent>
-                  <b>Summary</b>: {this.state.currentResult.show.summary.replace(/<\/?[^>]+(>|$)/g, "")}
+                  <b>Summary</b>: 
+                  {this.state.currentResult.show.summary ? (this.state.currentResult.show.summary.replace(/<\/?[^>]+(>|$)/g, "")) : " N/A"}
                   <br />
                   <br />
                   {this.state.currentResult.show.officialSite ? (<span><b>Official Site</b>: <a href={this.state.currentResult.show.officialSite} target="_blank">Click here</a></span>) : (null)}
