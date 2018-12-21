@@ -88,7 +88,7 @@ class TemporaryDrawer extends React.Component {
       <div className={classes.list}>
         <List>
           {["Home", "Search", "Watchlist"].map((text, index) => (
-            <Link to={`/${text}`}>
+            <Link to={`/${text}`} key={text}>
               <ListItem button key={text}>
                 {/* <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -101,7 +101,7 @@ class TemporaryDrawer extends React.Component {
         <Divider />
         <List>
           {[/*"Account Settings", */"Profile", (this.props.isAuth) ? "Logout" : "Login"].map((text, index) => (
-            <Link to={`/${text}`}>
+            <Link to={`/${text}`} key={text}>
               <ListItem button key={text}>
                 {/* <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
