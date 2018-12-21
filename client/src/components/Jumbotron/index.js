@@ -5,23 +5,32 @@ import secondimage from '../../Images/marvel-holiday-2018-ss06.jpg';
 import thirdimage from '../../Images/the-sinner.jpg';
 import fourthimage from '../../Images/fresh-off-the-boat-tv-review.jpg';
 import fifthimage from '../../Images/breaking-bad.jpg';
+import { withStyles, MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import './style.css';
 
 
 const styles = {
   header: {
     backgroundColor: "white",
-    color: "black"
+    color: "#212529",
+    fontFamily: "sans-serif",
+    fontWeight: "3em",
+    borderRadius: "0px 50px",
+    marginLeft: "12.5%",
+    width: "75%",
+    textAlign: "center"
   },
   description: {
     backgroundColor: "white",
-    color: "black",
-    paddingBottom: "1em"
+    color: "#212529",
+    padding: "0.5em",
+    fontFamily: "sans-serif",
+    fontWeight: "3em",
+    borderRadius: "0px 50px"
   },
   images: {
     width: "100%",
-    height: "auto",
-    maxHeight: window.innerHeight - 150,
+    height: window.innerHeight - 150,
     border: "10px solid black"
   },
   box: {
@@ -29,11 +38,23 @@ const styles = {
   }
 };
 
+const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      'sans-serif'
+    ].join(','),
+  },
+});
+
 class Jumbotron extends Component {
 
 
   render() {
     return (
+      <div>
+      <MuiThemeProvider theme={theme}>
       <div className="container" style={styles.box}>
         <div className="col-md-auto">
           <div id="carouselExampleSlidesOnly" className="carousel slide" data-ride="carousel">
@@ -76,6 +97,8 @@ class Jumbotron extends Component {
             </div>
           </div>
         </div>
+        </div>
+        </MuiThemeProvider>
       </div>
     )
   }

@@ -23,7 +23,6 @@ class WatchList extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <div>
-          <br />
           <WatchListGrid watchList={watchList} />
         </div>
       </MuiThemeProvider>
