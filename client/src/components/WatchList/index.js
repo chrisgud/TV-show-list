@@ -6,6 +6,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
+
 import RemoveIcon from '@material-ui/icons/Remove';
 
 import { connect } from "react-redux";
@@ -34,9 +35,11 @@ const styles = theme => ({
 
 function WatchListGrid(props) {
   const { classes, watchList } = props;
+
   const removeFromWatchListButtonFunction = show => {
     props.removeFromUserWatchList(show, props.getCurrentUsersWatchList)
   }
+  
   return (
     <div className={classes.root}>
       <GridList cellHeight={180} className={classes.gridList}>
@@ -44,6 +47,7 @@ function WatchListGrid(props) {
           <ListSubheader component="div">Watch List</ListSubheader>
         </GridListTile>
         {watchList.map(show => (
+
           <GridListTile key={show.show.image}>
             {show.show.image ? (
               <img
@@ -85,6 +89,7 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
+
   mapStateToProps,
   {
     removeFromUserWatchList,
