@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 
 import {
   removeFromUserWatchList,
-  searchUserInfo,
+  getCurrentUsersWatchList,
 } from "../../actions/authActions";
 
 const styles = theme => ({
@@ -35,7 +35,7 @@ const styles = theme => ({
 function WatchListGrid(props) {
   const { classes, watchList } = props;
   const removeFromWatchListButtonFunction = show => {
-    props.removeFromUserWatchList(show, props.searchUserInfo)
+    props.removeFromUserWatchList(show, props.getCurrentUsersWatchList)
   }
   return (
     <div className={classes.root}>
@@ -88,7 +88,7 @@ export default connect(
   mapStateToProps,
   {
     removeFromUserWatchList,
-    searchUserInfo,
+    getCurrentUsersWatchList,
   }
 )(withStyles(styles)(WatchListGrid));
 
